@@ -39,7 +39,11 @@ There is also a very basic curl request to test that the service is actually ava
 
 ## Tests
 
-The details need to be documented but the basic idea to run all tests:
+High-level of the [Test Plan](https://github.com/gradeawarrior/gurukula/blob/master/docs/README.md) can be found under [docs](https://github.com/gradeawarrior/gurukula/blob/master/docs)
+
+### Running tests
+
+To run all tests:
 
 	make test
 
