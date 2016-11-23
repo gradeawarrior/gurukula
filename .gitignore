@@ -1,2 +1,10 @@
+# Service Management files
 target/
 logs/
+
+# Java Files
+.idea/
+*.iml
+
+# Mac files
+*.DS_Store

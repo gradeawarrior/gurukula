@@ -16,6 +16,7 @@ This application has the following features:
 * `bash`
 * `make`
 * `Java 8`
+* [Apache Maven](https://maven.apache.org/)
 
 _**WARNING:**_ _The `Makefile` ensures that all operations are running using Java 8. This is a basic pre-requisites for both running and testing the service_
 

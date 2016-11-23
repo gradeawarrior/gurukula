@@ -47,15 +47,16 @@ server.restart: check.version
 # Run Tests
 # ===================================================================
 
-test: check.version test.headless
+test: check.version test.functional
 
 test.sanity: check.version
 	curl -v $(SERVER) -s > /dev/null
 
 test.functional: check.version
 	$(info ******************)
-	$(info Testing
+	$(info Testing)
 	$(info ******************)
+	cd gurukula-test; mvn test
 
 test.functional.headless: check.version
 	$(info ******************)
