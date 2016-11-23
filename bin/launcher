@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+
+
+#*****************************
+#********** Functions ********
+#*****************************
+
+
+printUsage() {
+  cat <<EOF
+Usage: launcher [command]
+	
+DETAILS:
+	run		Run the service in the foreground
+	start		Start the server
+	stop		Stop the server
+	restart		Restart the server
+	status		Check the run status of this server
+	help		Display this message
+EOF
+}
+
+run() {
+	java -jar bin/gurukula-0.0.1-SNAPSHOT.war
+}
+
+start() {
+	java -jar bin/gurukula-0.0.1-SNAPSHOT.war 2>&1 > ${logs_dir}/launcher.log &
+	echo "Starting service...";
+}
+
+stop() {
+	pid=$1;
+	echo "Stopping service...";
+	if [ "${pid}" != "" ]
+	then
+		kill ${pid}
+	fi
+}
+
+
+#*****************************
+#************ Main ***********
+#*****************************
+
+
+pid=$(ps -ef | grep java | grep -v grep | grep gurukula | awk '{print $2}')
+logs_dir="./logs"
+test_running=$(cat ${logs_dir}/launcher.log | grep -c Local)
+mkdir -p ${logs_dir}
+
+# Check that there are at least 1 parameters
+if (test $# -lt 1)
+then
+	printUsage;
+	exit;
+else
+	while [ "$1" != '' ]
+	do
+		case $1
+		in
+		run)
+			run;
+			shift 1;;
+		start)
+			if [ "$pid" == "" ]
+			then
+				start;
+			fi
+			shift 1;;
+		stop)
+			stop ${pid};
+			shift 1;;
+		restart)
+			stop ${pid};
+			start;
+			shift 1;;
+		status)
+			if [ "$pid" != "" ]
+			then
+				if [ ${test_running} -eq 1 ]
+				then
+					echo "Service started at ${pid} and available at http://localhost:8080";
+					exit 0;
+				else
+					echo "Service started at ${pid} but not ready";
+					exit 1;
+				fi
+			else
+				echo "Service stopped";
+				exit 1;
+			fi
+			shift 1;;
+		*)
+			echo "[ERROR] Uknown Parameter: '$1'";
+			printUsage;
+			exit;;
+		esac
+	done
+fi
