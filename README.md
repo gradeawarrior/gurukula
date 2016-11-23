@@ -33,13 +33,15 @@ There are some basic management operations ensure that the gurukula service is r
 
 	make [start|stop|restart|status]
 	
-There is also a very basic curl request to test the service is actually available:
+There is also a very basic curl request to test that the service is actually available:
 
 	make test.sanity
 
 ## Tests
 
-TODO
+The details need to be documented but the basic idea to run all tests:
+
+	make test
 
 ## References
 
