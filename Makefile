@@ -12,6 +12,12 @@ else
 	$(error You're not using Java 8 - version: $(JAVA_VERSION))
 endif
 
+install.dependencies:
+	cd bin; curl -L https://github.com/mozilla/geckodriver/releases/download/v0.11.1/geckodriver-v0.11.1-macos.tar.gz > geckodriver-v0.11.1-macos.tar.gz
+	cd bin; tar -xvzf geckodriver-v0.11.1-macos.tar.gz
+	brew install selenium-server-standalone
+	
+
 debug: check.version
 	$(info Java version: $(JAVA_VERSION) - $(JAVA_VERSION_MAJOR_MINOR))
 
@@ -50,7 +56,7 @@ server.restart: check.version
 test: check.version test.functional
 
 test.sanity: check.version
-	curl -v $(SERVER) -s > /dev/null
+	time curl -v $(SERVER) -s > /dev/null
 
 test.functional: check.version
 	$(info ******************)

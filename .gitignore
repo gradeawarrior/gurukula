@@ -8,3 +8,6 @@ logs/
 
 # Mac files
 *.DS_Store
+
+## Ignore Selenium drivers
+geckodriver*
