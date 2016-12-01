@@ -34,7 +34,7 @@ stop() {
 	echo "Stopping service...";
 	if [ "${pid}" != "" ]
 	then
-		kill ${pid}
+		kill -9 ${pid}
 	fi
 }
 
