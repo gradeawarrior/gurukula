@@ -4,10 +4,12 @@ import org.apache.commons.lang.NotImplementedException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class SeleniumWebdriver extends RemoteWebDriver implements Selenium {
@@ -723,5 +725,17 @@ public class SeleniumWebdriver extends RemoteWebDriver implements Selenium {
     public Selenium type(Object locator, String txt) {
         driver.findElement((By) locator).sendKeys(txt);
         return this;
+    }
+
+    public String getText(Object locator) {
+        return driver.findElement((By) locator).getText();
+    }
+
+    public Object getElement(Object locator) {
+        return driver.findElement((By) locator);
+    }
+
+    public List<WebElement> getElements(Object locator) {
+        return driver.findElements((By) locator);
     }
 }

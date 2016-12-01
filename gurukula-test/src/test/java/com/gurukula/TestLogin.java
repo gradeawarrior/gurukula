@@ -44,10 +44,10 @@ public class TestLogin {
 
             // Open browser to the homepage
             homePageUnauthenticated.open(gurukulaURL);
-        } catch (Exception e){
+        } catch (Exception e) {
             if (sel != null)
                 sel.quit();
-            throw new Exception("Something went wrong!");
+            throw e;
         }
     }
 

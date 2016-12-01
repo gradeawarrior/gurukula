@@ -26,4 +26,11 @@ public class HeaderWidget extends Widget {
         accountsWidget.waitForPresentAndVisible();
         return this;
     }
+
+    public void validate() {
+        super.presentAndVisible();
+        gurukulaBannerLink.waitForPresentAndVisible();
+        homeLink.waitForPresentAndVisible();
+        accountsWidget.waitForPresentAndVisible();
+    }
 }

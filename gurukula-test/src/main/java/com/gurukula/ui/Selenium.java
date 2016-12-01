@@ -1,6 +1,9 @@
 package com.gurukula.ui;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public interface Selenium extends com.thoughtworks.selenium.Selenium {
     public WebDriver getDriver();
@@ -38,5 +41,11 @@ public interface Selenium extends com.thoughtworks.selenium.Selenium {
     public Selenium waitForPageToLoad(long timeout);
 
     public Selenium type(Object locator, String txt);
+
+    public String getText(Object locator);
+
+    public Object getElement(Object locator);
+
+    public List<WebElement> getElements(Object locator);
 
 }

@@ -4,7 +4,9 @@ import com.thoughtworks.selenium.DefaultSelenium;
 import org.apache.commons.lang.NotImplementedException;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Selenium10 extends DefaultSelenium implements Selenium {
@@ -81,7 +83,7 @@ public class Selenium10 extends DefaultSelenium implements Selenium {
     }
 
     public Selenium waitForPresentAndVisible(Object locator, long waitTime) {
-        return null;
+        throw new NotImplementedException();
     }
 
     public Selenium waitForPageToLoad(long timeout) {
@@ -97,6 +99,18 @@ public class Selenium10 extends DefaultSelenium implements Selenium {
     public Selenium type(Object locator, String txt) {
         super.type((String) locator, txt);
         return this;
+    }
+
+    public String getText(Object locator) {
+        return super.getText(locator.toString());
+    }
+
+    public Object getElement(Object locator) {
+        throw new NotImplementedException("getElement is not available in Selenium 1.0!");
+    }
+
+    public List<WebElement> getElements(Object locator) {
+        throw new NotImplementedException("getElements is not available in Selenium 1.0!");
     }
 
     public boolean isPresent(Object locator) {

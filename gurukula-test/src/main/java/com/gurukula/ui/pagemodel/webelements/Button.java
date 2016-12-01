@@ -12,4 +12,9 @@ public class Button extends Element {
         waitForPresentAndVisible();
         sel.click(locator);
     }
+
+    public boolean isEnabled() {
+        waitForPresentAndVisible();
+        return sel.isEnabled(locator);
+    }
 }
