@@ -1,67 +1,100 @@
 package com.gurukula.ui.pagemodel.webelements;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import com.gurukula.ui.Selenium;
+import org.openqa.selenium.ElementNotVisibleException;
+import org.openqa.selenium.IllegalLocatorException;
+import org.openqa.selenium.NotFoundException;
 
 public class Element {
 
-    protected WebDriver driver;
-    protected By by;
-    protected int waitTime = 10;
+    protected Selenium sel;
+    protected Object locator;
+    protected int waitTime = 10000;
 
-    public Element(WebDriver driver, By by) {
-        this.driver = driver;
-        this.by = by;
+    public Element(Selenium sel, Object locator) {
+        this.sel = sel;
+        this.locator = locator;
     }
 
-    public By getBy() {
-        return by;
+    public Object getLocator() {
+        return locator;
     }
 
     public boolean isVisible() {
-        return isDisplayed();
+        return sel.isVisible(locator);
     }
 
     public boolean isDisplayed() {
-        return this.driver.findElement(by).isDisplayed();
+        return sel.isDisplayed(locator);
     }
 
     public boolean isEnabled() {
-        return this.driver.findElement(by).isEnabled();
+        return sel.isEnabled(locator);
     }
 
     public boolean isSelected() {
-        return this.driver.findElement(by).isSelected();
+        return sel.isSelected(locator);
     }
 
-    public Element waitForElementPresent(int waitTime) {
-        WebDriverWait wait = new WebDriverWait(driver, waitTime);
-        wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    public boolean isPresent() { return sel.isPresent(locator);}
+
+    public boolean isPresentAndVisible() {
+        return sel.isPresent(locator) && sel.isVisible(locator);
+    }
+
+    public Element present() throws NotFoundException {
+        if (!sel.isPresent(locator))
+            throw new NotFoundException("locator='" + locator + "' was not found!");
         return this;
     }
 
-    public Element waitForElementVisible(int waitTime) {
-        WebDriverWait wait = new WebDriverWait(driver, waitTime);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+    public Element visible() throws ElementNotVisibleException {
+        if (!sel.isVisible(locator))
+            throw new ElementNotVisibleException("locator='" + locator + "' was not visible!");
         return this;
     }
 
-    public Element waitForElementPresent() {
-        return waitForElementPresent(waitTime);
+    public Element presentAndVisible() throws NotFoundException, ElementNotVisibleException {
+        return present().visible();
     }
 
-    public Element waitForElementVisible() {
-        return waitForElementVisible(waitTime);
+    public Element notPresentAndVisible() throws IllegalLocatorException {
+        try {
+            presentAndVisible();
+            throw new IllegalLocatorException("locator='" + locator + "' was found but expected not to be present!");
+        }
+        catch (NotFoundException nfe) {
+            return this;
+        }
+        catch (ElementNotVisibleException enve) {
+            return this;
+        }
     }
 
-    public Element waitForElementPresentAndVisible(int waitTime) {
-        return waitForElementPresent(waitTime).waitForElementVisible(waitTime);
+    public Element waitForPresent(long waitTime) {
+        sel.waitForPresent(locator, waitTime);
+        return this;
     }
 
-    public Element waitForElementPresentAndVisible() {
-        return waitForElementPresentAndVisible(waitTime);
+    public Element waitForVisible(int waitTime) {
+        sel.waitForVisible(locator, waitTime);
+        return this;
+    }
+
+    public Element waitForPresent() {
+        return waitForPresent(waitTime);
+    }
+
+    public Element waitForVisible() {
+        return waitForVisible(waitTime);
+    }
+
+    public Element waitForPresentAndVisible(int waitTime) {
+        sel.waitForPresentAndVisible(locator, waitTime);
+        return this;
+    }
+
+    public Element waitForPresentAndVisible() {
+        return waitForPresentAndVisible(waitTime);
     }
 }

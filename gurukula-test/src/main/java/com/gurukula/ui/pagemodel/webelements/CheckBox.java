@@ -2,9 +2,9 @@ package com.gurukula.ui.pagemodel.webelements;
 
 import com.gurukula.ui.Selenium;
 
-public class Button extends Element {
+public class CheckBox extends Element{
 
-    public Button(Selenium sel, Object locator) {
+    public CheckBox(Selenium sel, Object locator) {
         super(sel, locator);
     }
 

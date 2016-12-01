@@ -1,12 +1,12 @@
 package com.gurukula.ui.pagemodel.webelements;
 
+import com.gurukula.ui.Selenium;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public class TextField extends Element {
 
-    public TextField(WebDriver driver, By by) {
-        super(driver, by);
+    public TextField(Selenium sel, Object locator) {
+        super(sel, locator);
     }
 
     public void type(String txt) {
@@ -14,12 +14,12 @@ public class TextField extends Element {
     }
 
     public void sendKeys(String txt) {
-        waitForElementPresentAndVisible();
-        driver.findElement(by).sendKeys(txt);
+        waitForPresentAndVisible();
+        sel.type(locator, txt);
     }
 
     public void submit() {
-        waitForElementPresentAndVisible();
-        driver.findElement(by).submit();
+        waitForPresentAndVisible();
+        sel.getDriver().findElement((By) locator).submit();
     }
 }

@@ -1,10 +1,8 @@
-package com.gurukula;
+package com.gurukula.poc;
 
-import org.testng.annotations.*;
 import org.testng.Assert;
 
 public class TestHelloWorld {
-    @Test
     public void testAddition() {
         Assert.assertEquals((int) MyApp.add(1, 1), 2);
     }

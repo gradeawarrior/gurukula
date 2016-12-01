@@ -1,6 +1,8 @@
 JAVA_VERSION=$(shell java -version 2>&1 | grep version | sed 's/"//g' | awk '{print $$3}')
 JAVA_VERSION_MAJOR_MINOR=$(shell echo $(JAVA_VERSION) | sed 's/\.[0-9_]*$$//')
 SERVER=http://localhost:8080
+SELENIUM_SERVER=http://localhost:4444
+GURUKULA_URL=http://localhost:8080
 
 default: check.version server.status
 
@@ -62,7 +64,7 @@ test.functional: check.version
 	$(info ******************)
 	$(info Testing)
 	$(info ******************)
-	cd gurukula-test; mvn test
+	cd gurukula-test; mvn test -Dselenium.server=$(SELENIUM_SERVER) -Dgurukula.url=$(GURUKULA_URL)
 
 test.functional.headless: check.version
 	$(info ******************)
