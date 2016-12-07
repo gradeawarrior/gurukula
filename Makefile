@@ -25,7 +25,6 @@ install.dependencies:
 	cd bin; curl -L https://github.com/mozilla/geckodriver/releases/download/v0.11.1/geckodriver-v0.11.1-macos.tar.gz > geckodriver-v0.11.1-macos.tar.gz
 	cd bin; tar -xvzf geckodriver-v0.11.1-macos.tar.gz
 	brew install selenium-server-standalone
-	
 
 debug: check.version
 	$(info Java version: $(JAVA_VERSION) - $(JAVA_VERSION_MAJOR_MINOR))
@@ -77,13 +76,13 @@ test.functional: check.version
 	$(info ******************)
 	$(info Testing)
 	$(info ******************)
-	cd gurukula-test; mvn test -Dselenium.server=$(SELENIUM_SERVER) -Dgurukula.url=$(GURUKULA_URL) -Dbrowser.type=$(BROWSER_TYPE)
+	cd gurukula-test; mvn clean test -Dselenium.server=$(SELENIUM_SERVER) -Dgurukula.url=$(GURUKULA_URL) -Dbrowser.type=$(BROWSER_TYPE)
 
 test.functional.headless: check.version
 	$(info ******************)
 	$(info Testing (Headless))
 	$(info ******************)
-	cd gurukula-test; mvn test -Dselenium.server=$(SELENIUM_SERVER) -Dgurukula.url=$(GURUKULA_URL) -Dbrowser.type=headless
+	cd gurukula-test; mvn clean test -Dselenium.server=$(SELENIUM_SERVER) -Dgurukula.url=$(GURUKULA_URL) -Dbrowser.type=headless
 
 test.load: check.version
 	$(info ******************)
@@ -101,7 +100,7 @@ test.load.grinder: test.sanity
 	$(info ******************)
 	$(info test.load.grinder)
 	$(info ******************)
-	cd mavenized-grinder; mvn -Dtest.command=example-get -Dgurukula.url=$(GURUKULA_URL) test
+	cd mavenized-grinder; mvn clean test -Dtest.command=example-get -Dgurukula.url=$(GURUKULA_URL)
 
 test.longevity: check.version
 	$(info ******************)

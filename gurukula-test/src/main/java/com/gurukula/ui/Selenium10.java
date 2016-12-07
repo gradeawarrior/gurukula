@@ -118,6 +118,14 @@ public class Selenium10 extends DefaultSelenium implements Selenium {
         throw new UnsupportedOperationException("getElements is not available in Selenium 1.0!");
     }
 
+    public long getPageTimeout() {
+        return pageWaitTime;
+    }
+
+    public long getElementTimeout() {
+        return elementWaitTime;
+    }
+
     public boolean isPresent(Object locator) {
         return super.isElementPresent((String) locator);
     }

@@ -27,11 +27,11 @@ public class AccountsWidget extends Widget {
     }
 
     public AccountsWidget waitForPresentAndVisibleSelectedAuthenticated() {
-        super.waitForPresentAndVisible();
-        settingsLink.waitForPresentAndVisible();
-        passwordLink.waitForPresentAndVisible();
-        sessionsLink.waitForPresentAndVisible();
-        logoutLink.waitForPresentAndVisible();
+        super.waitForPresentAndVisible(sel.getPageTimeout());
+        settingsLink.waitForPresentAndVisible(sel.getPageTimeout());
+        passwordLink.waitForPresentAndVisible(sel.getPageTimeout());
+        sessionsLink.waitForPresentAndVisible(sel.getPageTimeout());
+        logoutLink.waitForPresentAndVisible(sel.getPageTimeout());
         return this;
     }
 

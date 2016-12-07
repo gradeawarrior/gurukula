@@ -16,8 +16,8 @@ import java.util.concurrent.TimeUnit;
 public class SeleniumWebdriver extends RemoteWebDriver implements Selenium {
     protected WebDriver driver;
     protected URI baseURI;
-    protected long elementWaitTime = 10000;
-    protected long pageWaitTime = 30000;
+    protected long elementTimeout = 10000;
+    protected long pageTimeout = 30000;
 
     public SeleniumWebdriver(WebDriver driver) {
         this.driver = driver;
@@ -34,7 +34,7 @@ public class SeleniumWebdriver extends RemoteWebDriver implements Selenium {
     protected void setTimeouts() {
 //        driver.manage().timeouts().implicitlyWait(elementWaitTime, TimeUnit.MILLISECONDS);
         if (!(driver instanceof HtmlUnitDriver))
-            driver.manage().timeouts().pageLoadTimeout(pageWaitTime, TimeUnit.MILLISECONDS);
+            driver.manage().timeouts().pageLoadTimeout(pageTimeout, TimeUnit.MILLISECONDS);
     }
 
     public void setExtensionJs(String s) {
@@ -719,7 +719,7 @@ public class SeleniumWebdriver extends RemoteWebDriver implements Selenium {
     }
 
     public Selenium waitForPresent(Object by) {
-        return waitForPresent(by, elementWaitTime);
+        return waitForPresent(by, elementTimeout);
     }
 
     public Selenium waitForPresent(Object by, long waitTime) {
@@ -729,7 +729,7 @@ public class SeleniumWebdriver extends RemoteWebDriver implements Selenium {
     }
 
     public Selenium waitForVisible(Object by) {
-        return waitForVisible(by, elementWaitTime);
+        return waitForVisible(by, elementTimeout);
     }
 
     public Selenium waitForVisible(Object by, long waitTime) {
@@ -739,7 +739,7 @@ public class SeleniumWebdriver extends RemoteWebDriver implements Selenium {
     }
 
     public Selenium waitForPresentAndVisible(Object by) {
-        return waitForPresentAndVisible(by, TimeUnit.MILLISECONDS.toSeconds(elementWaitTime));
+        return waitForPresentAndVisible(by, TimeUnit.MILLISECONDS.toSeconds(elementTimeout));
     }
 
     public Selenium waitForPresentAndVisible(Object by, long waitTime) {
@@ -769,5 +769,13 @@ public class SeleniumWebdriver extends RemoteWebDriver implements Selenium {
 
     public List<WebElement> getElements(Object locator) {
         return driver.findElements((By) locator);
+    }
+
+    public long getPageTimeout() {
+        return pageTimeout;
+    }
+
+    public long getElementTimeout() {
+        return elementTimeout;
     }
 }

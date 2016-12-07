@@ -24,7 +24,7 @@ public class HomePageUnauthenticated extends GurukulaPage {
     public WebPage waitForPageLoad() {
         if (!(sel.getDriver() instanceof HtmlUnitDriver)) {
             super.waitForPageLoad();
-            loginWidget.waitForPresentAndVisible();
+            loginWidget.waitForPresentAndVisible(pageWaitTime);
         }
         return this;
     }

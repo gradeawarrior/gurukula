@@ -54,6 +54,9 @@ public class TestLogin {
             homePageAuthenticated = new HomePageAuthenticated(sel);
             homePageUnauthenticated = new HomePageUnauthenticated(sel);
             loginPage = new LoginPage(sel);
+
+            // Open Gurukula page
+            homePageUnauthenticated.open();
         } catch (Exception e) {
             if (sel != null)
                 sel.quit();
@@ -61,22 +64,13 @@ public class TestLogin {
         }
     }
 
-    @BeforeMethod
-    public void methodSetup() throws Exception {
-        try {
-            homePageUnauthenticated.open(gurukulaURL);
-        } catch(Exception e) {
-            sel.quit();
-            throw e;
-        }
-    }
-
+    @Test(groups = "unauthenticated")
     public void testUnauthenticated() {
         homePageUnauthenticated.waitForPageLoad().validate();
     }
 
-    public void testAuthenticated() {
-        homePageUnauthenticated.waitForPageLoad().validate();
+    @Test(groups = "authenticated", dependsOnGroups = "unauthenticated")
+    public void testAuthenticated() throws InterruptedException {
         homePageUnauthenticated.loginWidget.loginLink.click();
         loginPage.waitForPageLoad().validate();
         loginPage.login("admin", "admin");
@@ -84,27 +78,12 @@ public class TestLogin {
         Assert.assertEquals(homePageAuthenticated.isLoggedIn(), true, "Expecting to be logged-in!");
     }
 
+    @Test(dependsOnGroups = "authenticated")
     public void testLogout() {
-        // Login
-        homePageUnauthenticated.waitForPageLoad().validate();
-        homePageUnauthenticated.loginWidget.loginLink.click();
-        loginPage.validate();
-        loginPage.login("admin", "admin");
-        homePageAuthenticated.waitForPageLoad().validate();
-        Assert.assertEquals(homePageAuthenticated.isLoggedIn(), true, "Expecting to be logged-in!");
-
-        // Logout
         homePageAuthenticated.headerWidget.accountsWidget.click();
         homePageAuthenticated.headerWidget.accountsWidget.logoutLink.click();
         homePageUnauthenticated.waitForPageLoad().validate();
         Assert.assertEquals(homePageUnauthenticated.isLoggedIn(), false, "Expecting to be logged-out!");
-    }
-
-    @AfterMethod
-    public void methodTearDown() throws URISyntaxException {
-        homePageAuthenticated.logout();
-        homePageUnauthenticated.open();
-        homePageUnauthenticated.waitForPageLoad();
     }
 
     @AfterClass

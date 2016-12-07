@@ -33,6 +33,12 @@ public class GurukulaPage extends WebPage {
     }
 
     public WebPage waitForPageLoad() {
+        // TODO - Adding a little sleep to help things along when waiting for elements to show up on the page
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if (!(sel.getDriver() instanceof HtmlUnitDriver))
             headerWidget.waitForPresentAndVisible(pageWaitTime);
         return this;

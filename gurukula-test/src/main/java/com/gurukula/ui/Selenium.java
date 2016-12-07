@@ -51,4 +51,8 @@ public interface Selenium extends com.thoughtworks.selenium.Selenium {
 
     public List<WebElement> getElements(Object locator);
 
+    public long getPageTimeout();
+
+    public long getElementTimeout();
+
 }
