@@ -7,11 +7,14 @@ import com.gurukula.testlib.LoginPage;
 import com.gurukula.ui.Selenium;
 import com.gurukula.ui.SeleniumWebdriver;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 @Test
@@ -27,23 +30,30 @@ public class TestLogin {
     public void classSetUp() throws Exception {
         String server = System.getProperty("selenium.server", "http://localhost:4444") + "/wd/hub";
         gurukulaURL = System.getProperty("gurukula.url", "http://localhost:8080");
+        String browserType = System.getProperty("browser.type", "firefox");
 
         Preconditions.checkNotNull(gurukulaURL, "Gurukula URL is not null!");
         Preconditions.checkArgument(gurukulaURL.length() > 0, "Gurukula URL is not empty!");
         try {
             // Specifying where the tests will run will be based on URL
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setBrowserName("firefox");
-            WebDriver browser = new RemoteWebDriver(new URL(server), capabilities);
-            sel = new SeleniumWebdriver(browser);
+            WebDriver browser;
+            if (browserType.equals("firefox")) {
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setBrowserName("firefox");
+                browser = new RemoteWebDriver(new URL(server), capabilities);
+            } else if (browserType.equals("headless")) {
+                browser = new HtmlUnitDriver();
+            } else {
+                throw new UnsupportedOperationException("Cannot launch browserType: '" + browserType + "'!");
+            }
+
+            // Instantiate Selenium
+            sel = new SeleniumWebdriver(browser, new URI(gurukulaURL));
 
             // Instantiate all pages that will be visited
             homePageAuthenticated = new HomePageAuthenticated(sel);
             homePageUnauthenticated = new HomePageUnauthenticated(sel);
             loginPage = new LoginPage(sel);
-
-            // Open browser to the homepage
-            homePageUnauthenticated.open(gurukulaURL);
         } catch (Exception e) {
             if (sel != null)
                 sel.quit();
@@ -51,13 +61,21 @@ public class TestLogin {
         }
     }
 
+    @BeforeMethod
+    public void methodSetup() throws Exception {
+        try {
+            homePageUnauthenticated.open(gurukulaURL);
+        } catch(Exception e) {
+            sel.quit();
+            throw e;
+        }
+    }
+
     public void testUnauthenticated() {
-        homePageUnauthenticated.open(gurukulaURL);
         homePageUnauthenticated.waitForPageLoad().validate();
     }
 
     public void testAuthenticated() {
-        homePageUnauthenticated.open(gurukulaURL);
         homePageUnauthenticated.waitForPageLoad().validate();
         homePageUnauthenticated.loginWidget.loginLink.click();
         loginPage.waitForPageLoad().validate();
@@ -68,7 +86,6 @@ public class TestLogin {
 
     public void testLogout() {
         // Login
-        homePageUnauthenticated.open(gurukulaURL);
         homePageUnauthenticated.waitForPageLoad().validate();
         homePageUnauthenticated.loginWidget.loginLink.click();
         loginPage.validate();
@@ -84,8 +101,9 @@ public class TestLogin {
     }
 
     @AfterMethod
-    public void methodTearDown() {
+    public void methodTearDown() throws URISyntaxException {
         homePageAuthenticated.logout();
+        homePageUnauthenticated.open();
         homePageUnauthenticated.waitForPageLoad();
     }
 

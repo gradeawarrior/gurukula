@@ -11,44 +11,68 @@ This application has the following features:
 
 ## Prerequesites
 
+This project was developed on a Mac, and therefore several of the Make targets refer to Mac dependencies. For simplicity, these instructions will assume running on a Mac.
+
 ### Required
 
 * `bash`
 * `make`
 * `Java 8`
+* Latest version of Firefox
 * [Apache Maven](https://maven.apache.org/)
+* [Homebrew](http://brew.sh/)
 
 _**WARNING:**_ _The `Makefile` ensures that all operations are running using Java 8. This is a basic pre-requisites for both running and testing the service_
 
 ### Optional Installation
 
-* [Apache Bench](http://httpd.apache.org/docs/2.4/programs/ab.html) (Available if Apache is installed)
-* [Burp Suite (Free)](http://www.portswigger.net/)
 * [jEnv](http://www.jenv.be/) (Manage your Java Environment)
 * `curl`
 
-## Service Management
+## Getting Started
 
-There are some basic management operations ensure that the gurukula service is running:
+The Makefile at the top level will help you get everything started and testing. My assumption right now is that all the pre-requisites have been installed.
 
-	make [start|stop|restart|status]
+### Starting all the services
+
+Installing addition dependencies:
+
+	make install.dependencies
 	
-There is also a very basic curl request to test that the service is actually available:
+Start the selenium server:
+
+	make selenium.run
+	
+To start the gurukula application, open a new terminal and execute the following:
+
+	make server.start
+	
+### Sanity test
+
+The service takes awhile to get started, so there is an included "sanity" test to ensure that the server is truly running:
 
 	make test.sanity
+	
+### Functional tests (GUI)
 
-## Tests
+The automated functional tests can be run using `make test`. These tests will launch a real browser using Selenium. The Selenium server is required to be running (see above on how to start).
 
-High-level of the [Test Plan](https://github.com/gradeawarrior/gurukula/blob/master/docs/README.md) can be found under [docs](https://github.com/gradeawarrior/gurukula/blob/master/docs)
 
-### Running tests
+## Testing
 
-To run all tests:
+### Test-Plan
 
-	make test
+High-level of the [Test Plan](https://github.com/gradeawarrior/gurukula/blob/master/docs/README.md) can be found under [docs](https://github.com/gradeawarrior/gurukula/blob/master/docs). This document can also be referred to for what was tested and automated.
+
+### Defects
+
+Defects, Enhancements, and Feature requests are documented here: [Defects and Improvements](https://github.com/gradeawarrior/gurukula/blob/master/docs/Issues.md)
 
 ## References
 
 * Selenium
+* [Apache Bench](http://httpd.apache.org/docs/2.4/programs/ab.html) (Available if Apache is installed)
+* [The Grinder - Load Testing Web Apps](https://www.credera.com/blog/technology-insights/java/the-grinder-load-testing-web-applications/)
+* [Mavenized Grinder]()
 * [Vulnerability Scanning Tools](https://www.owasp.org/index.php/Category:Vulnerability_Scanning_Tools)
 * [Burp Suite (Free)](http://www.portswigger.net/)

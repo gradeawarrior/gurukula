@@ -17,10 +17,15 @@ public class Selenium10 extends DefaultSelenium implements Selenium {
 
     public Selenium10(String serverHost, int serverPort, String browserStartCommand, String browserURL) {
         super(serverHost, serverPort, browserStartCommand, browserURL);
+        super.setTimeout(Long.toString(elementWaitTime));
     }
 
     public WebDriver getDriver() {
-        throw new NotImplementedException("getDriver is only available in Selenium WebDriver!");
+        throw new UnsupportedOperationException("getDriver is only available in Selenium WebDriver!");
+    }
+
+    public void openRelativePath(String path) {
+        throw new UnsupportedOperationException("openRelative is not available in Selenium 1.0!");
     }
 
     public void quit() {
@@ -106,11 +111,11 @@ public class Selenium10 extends DefaultSelenium implements Selenium {
     }
 
     public Object getElement(Object locator) {
-        throw new NotImplementedException("getElement is not available in Selenium 1.0!");
+        throw new UnsupportedOperationException("getElement is not available in Selenium 1.0!");
     }
 
     public List<WebElement> getElements(Object locator) {
-        throw new NotImplementedException("getElements is not available in Selenium 1.0!");
+        throw new UnsupportedOperationException("getElements is not available in Selenium 1.0!");
     }
 
     public boolean isPresent(Object locator) {
@@ -122,15 +127,15 @@ public class Selenium10 extends DefaultSelenium implements Selenium {
     }
 
     public boolean isDisplayed(Object locator) {
-        throw new NotImplementedException("isDisplayed is not available in Selenium 1.0!");
+        throw new UnsupportedOperationException("isDisplayed is not available in Selenium 1.0!");
     }
 
     public boolean isEnabled(Object locator) {
-        throw new NotImplementedException("isEnabled is not available in Selenium 1.0!");
+        throw new UnsupportedOperationException("isEnabled is not available in Selenium 1.0!");
     }
 
     public boolean isSelected(Object locator) {
-        throw new NotImplementedException("isSelected is not available in Selenium 1.0!");
+        throw new UnsupportedOperationException("isSelected is not available in Selenium 1.0!");
     }
 
     public boolean isPresentAndVisible(Object locator) {

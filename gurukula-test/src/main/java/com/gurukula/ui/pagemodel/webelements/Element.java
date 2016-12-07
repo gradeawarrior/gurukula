@@ -89,7 +89,7 @@ public class Element {
         return waitForVisible(waitTime);
     }
 
-    public Element waitForPresentAndVisible(int waitTime) {
+    public Element waitForPresentAndVisible(long waitTime) {
         sel.waitForPresentAndVisible(locator, waitTime);
         return this;
     }

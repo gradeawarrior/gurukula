@@ -39,11 +39,11 @@ public class LoginPage extends GurukulaPage {
     }
 
     public WebPage waitForPageLoad() {
-        loginTextField.waitForPresentAndVisible();
-        passwordTextField.waitForPresentAndVisible();
-        automaticLoginCheckBox.waitForPresentAndVisible();
-        submitButton.waitForPresentAndVisible();
-        headerWidget.waitForPresentAndVisible();
+        loginTextField.waitForPresentAndVisible(pageWaitTime);
+        passwordTextField.waitForPresentAndVisible(pageWaitTime);
+        automaticLoginCheckBox.waitForPresentAndVisible(pageWaitTime);
+        submitButton.waitForPresentAndVisible(pageWaitTime);
+        headerWidget.waitForPresentAndVisible(pageWaitTime);
         return this;
     }
 

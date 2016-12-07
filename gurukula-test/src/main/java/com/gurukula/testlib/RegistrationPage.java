@@ -20,12 +20,7 @@ public class RegistrationPage extends GurukulaPage {
 
     public RegistrationPage(Selenium sel) {
         super(sel);
-        url = "/#/register";
-        setWebElements();
-    }
-
-    public RegistrationPage(Selenium sel, String url) {
-        super(sel, url);
+        path = "/#/register";
         setWebElements();
     }
 

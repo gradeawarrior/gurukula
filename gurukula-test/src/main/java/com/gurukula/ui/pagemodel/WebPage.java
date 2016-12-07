@@ -6,12 +6,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.URISyntaxException;
 import java.util.concurrent.TimeUnit;
 
 public abstract class WebPage {
 
     protected Selenium sel;
-    protected String url = null;
+    protected String path = "";
     protected long pageWaitTime = 30000;
     protected long elementWaitTime = 10000;
 
@@ -19,14 +20,13 @@ public abstract class WebPage {
         this.sel = sel;
     }
 
-    public WebPage(Selenium sel, String url) {
+    public WebPage(Selenium sel, String path) {
         this.sel = sel;
-        this.url = url;
+        this.path = path;
     }
 
-    public void open() {
-        Preconditions.checkNotNull(url, "The url for this page was not specified");
-        open(url);
+    public void open() throws URISyntaxException {
+        sel.openRelativePath(path);
     }
 
     public void close() {
@@ -37,8 +37,8 @@ public abstract class WebPage {
         sel.quit();
     }
 
-    public void open(String url) {
-        sel.open(url);
+    public void open(String uri) {
+        sel.open(uri);
     }
 
     public String getTitle() {

@@ -1,23 +1,40 @@
 package com.gurukula.ui;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NotFoundException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.http.client.utils.URIBuilder;
+import org.openqa.selenium.*;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class SeleniumWebdriver extends RemoteWebDriver implements Selenium {
     protected WebDriver driver;
+    protected URI baseURI;
     protected long elementWaitTime = 10000;
+    protected long pageWaitTime = 30000;
 
     public SeleniumWebdriver(WebDriver driver) {
         this.driver = driver;
+        this.baseURI = null;
+        setTimeouts();
+    }
+
+    public SeleniumWebdriver(WebDriver driver, URI baseURI) {
+        this.driver = driver;
+        this.baseURI = baseURI;
+        setTimeouts();
+    }
+
+    protected void setTimeouts() {
+//        driver.manage().timeouts().implicitlyWait(elementWaitTime, TimeUnit.MILLISECONDS);
+        if (!(driver instanceof HtmlUnitDriver))
+            driver.manage().timeouts().pageLoadTimeout(pageWaitTime, TimeUnit.MILLISECONDS);
     }
 
     public void setExtensionJs(String s) {
@@ -648,6 +665,13 @@ public class SeleniumWebdriver extends RemoteWebDriver implements Selenium {
         return driver;
     }
 
+    public void openRelativePath(String path) throws URISyntaxException {
+        // TODO - URIBuilder is URLEncoding '#'
+        // URI uri = (new URIBuilder(baseURI)).setPath(path).build();
+        String uri = baseURI + path;
+        open(uri.toString());
+    }
+
     public Selenium click(Object by) {
         driver.findElement((By) by).click();
         return this;
@@ -659,9 +683,13 @@ public class SeleniumWebdriver extends RemoteWebDriver implements Selenium {
 
     public boolean isPresent(Object locator) {
         try {
-            driver.findElement((By) locator);
+            // TODO - Apparently setting to 0 does not actually trigger a timeout immediately. Could be a communication issue using RemoteWebDriver
+            waitForPresent(locator, 3000);
+            this.driver.findElement((By) locator);
             return true;
-        } catch (NotFoundException nfe) {
+        } catch (TimeoutException e) {
+            return false;
+        } catch (NotFoundException e) {
             return false;
         }
     }
@@ -672,8 +700,12 @@ public class SeleniumWebdriver extends RemoteWebDriver implements Selenium {
 
     public boolean isDisplayed(Object locator) {
         try {
-            return driver.findElement((By) locator).isDisplayed();
-        } catch (NotFoundException nfe) {
+            // TODO - Apparently setting to 0 does not actually trigger a timeout immediately. Could be a communication issue using RemoteWebDriver
+            waitForVisible(locator, 3000);
+            return this.driver.findElement((By) locator).isDisplayed();
+        } catch (TimeoutException e) {
+            return false;
+        } catch (NotFoundException e) {
             return false;
         }
     }
@@ -687,17 +719,17 @@ public class SeleniumWebdriver extends RemoteWebDriver implements Selenium {
     }
 
     public Selenium waitForPresent(Object by) {
-        return waitForPresent(by, TimeUnit.MILLISECONDS.toSeconds(elementWaitTime));
+        return waitForPresent(by, elementWaitTime);
     }
 
     public Selenium waitForPresent(Object by, long waitTime) {
-        WebDriverWait wait = new WebDriverWait(driver, waitTime);
+        WebDriverWait wait = new WebDriverWait(driver, TimeUnit.MILLISECONDS.toSeconds(waitTime));
         wait.until(ExpectedConditions.presenceOfElementLocated((By) by));
         return this;
     }
 
     public Selenium waitForVisible(Object by) {
-        return waitForVisible(by, TimeUnit.MILLISECONDS.toSeconds(elementWaitTime));
+        return waitForVisible(by, elementWaitTime);
     }
 
     public Selenium waitForVisible(Object by, long waitTime) {

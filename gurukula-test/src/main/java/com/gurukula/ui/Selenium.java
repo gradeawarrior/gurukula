@@ -3,10 +3,13 @@ package com.gurukula.ui;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
 public interface Selenium extends com.thoughtworks.selenium.Selenium {
     public WebDriver getDriver();
+
+    public void openRelativePath(String path) throws URISyntaxException;
 
     public void quit();
 

@@ -1,4 +1,4 @@
-package com.gurukula.testlib;
+package com.gurukula.poc.testlib;
 
 import com.gurukula.ui.Selenium;
 import com.gurukula.ui.pagemodel.WebPage;
@@ -12,8 +12,8 @@ public class GooglePage10 extends WebPage {
         searchField = new TextField(sel, "q");
     }
 
-    public GooglePage10(Selenium sel, String url) {
-        super(sel, url);
+    public GooglePage10(Selenium sel, String path) {
+        super(sel, path);
         searchField = new TextField(sel, "q");
     }
 

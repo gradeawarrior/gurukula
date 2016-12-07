@@ -8,6 +8,7 @@ import com.gurukula.ui.pagemodel.WebPage;
 import com.gurukula.ui.pagemodel.webelements.Link;
 import org.apache.commons.lang.NotImplementedException;
 import org.openqa.selenium.By;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class GurukulaPage extends WebPage {
     public LoginWidget loginWidget;
@@ -19,18 +20,21 @@ public class GurukulaPage extends WebPage {
         headerWidget = new HeaderWidget(sel, By.id("navbar-collapse"));
     }
 
-    public GurukulaPage(Selenium sel, String url) {
-        super(sel, url);
+    public GurukulaPage(Selenium sel, String path) {
+        super(sel, path);
         loginWidget = new LoginWidget(sel, By.xpath("//div[contains(@class, 'col-md-8')]/div[@ng-switch='isAuthenticated()']"));
         headerWidget = new HeaderWidget(sel, By.id("navbar-collapse"));
     }
 
     public boolean isLoggedIn() {
-        return (!loginWidget.loginLink.isPresentAndVisible() && !loginWidget.registerAccountLink.isPresentAndVisible()) || headerWidget.accountsWidget.logoutLink.isPresent();
+        // TODO - Disabling to speed-up tests. Right now, elements not present and visible are taking too long!
+        // return (!loginWidget.loginLink.isPresentAndVisible() && !loginWidget.registerAccountLink.isPresentAndVisible()) || headerWidget.accountsWidget.logoutLink.isPresent();
+        return headerWidget.accountsWidget.logoutLink.isPresent();
     }
 
     public WebPage waitForPageLoad() {
-        headerWidget.waitForPresentAndVisible();
+        if (!(sel.getDriver() instanceof HtmlUnitDriver))
+            headerWidget.waitForPresentAndVisible(pageWaitTime);
         return this;
     }
 

@@ -2,12 +2,13 @@ package com.gurukula.testlib;
 
 import com.gurukula.ui.Selenium;
 import com.gurukula.ui.pagemodel.WebPage;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class HomePageUnauthenticated extends GurukulaPage {
 
     public HomePageUnauthenticated(Selenium sel) {
         super(sel);
-        url = "/#/";
+        path = "/#/";
     }
 
     public HomePageUnauthenticated logout() {
@@ -21,7 +22,10 @@ public class HomePageUnauthenticated extends GurukulaPage {
     }
 
     public WebPage waitForPageLoad() {
-        loginWidget.waitForPresentAndVisible();
+        if (!(sel.getDriver() instanceof HtmlUnitDriver)) {
+            super.waitForPageLoad();
+            loginWidget.waitForPresentAndVisible();
+        }
         return this;
     }
 

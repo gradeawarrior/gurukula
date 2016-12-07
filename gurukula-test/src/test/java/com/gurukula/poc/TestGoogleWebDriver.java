@@ -1,6 +1,6 @@
 package com.gurukula.poc;
 
-import com.gurukula.testlib.GooglePageWebDriver;
+import com.gurukula.poc.testlib.GooglePageWebDriver;
 import com.gurukula.ui.Selenium;
 import com.gurukula.ui.SeleniumWebdriver;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +10,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
@@ -19,7 +21,7 @@ import java.net.URL;
 public class TestGoogleWebDriver {
 
     @Test
-    public void testSearchGoogle() throws MalformedURLException, InterruptedException {
+    public void testSearchGoogle() throws MalformedURLException, InterruptedException, URISyntaxException {
         // TODO: This should be set via PATH=/Users/psalas/Downloads/geckodriver and the selenium-server started remotely
         // System.setProperty("webdriver.gecko.driver", "/Users/psalas/Downloads/geckodriver");
 
@@ -32,8 +34,8 @@ public class TestGoogleWebDriver {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName("firefox");
             browser = new RemoteWebDriver(new URL(server), capabilities);
-            Selenium sel = new SeleniumWebdriver(browser);
-            GooglePageWebDriver google = new GooglePageWebDriver(sel, google_url);
+            Selenium sel = new SeleniumWebdriver(browser, new URI(google_url));
+            GooglePageWebDriver google = new GooglePageWebDriver(sel);
             String searchTerm = "Cheese!";
 
             // Open Gurukula

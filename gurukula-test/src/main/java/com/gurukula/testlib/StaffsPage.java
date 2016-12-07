@@ -16,11 +16,6 @@ public class StaffsPage extends WebPage {
         setWebElements();
     }
 
-    public StaffsPage(Selenium sel, String url) {
-        super(sel,url);
-        setWebElements();
-    }
-
     protected void setWebElements() {
         createStaffButton = new Button(sel, By.xpath("//button/span[@translate='gurukulaApp.staff.home.createLabel']"));
         createEditStaffWidget = new CreateEditStaffWidget(sel, By.name("editForm"));
