@@ -5,17 +5,21 @@ import com.gurukula.ui.Selenium;
 import com.gurukula.ui.pagemodel.WebPage;
 import com.gurukula.ui.pagemodel.webelements.Button;
 import com.gurukula.ui.pagemodel.webelements.CheckBox;
+import com.gurukula.ui.pagemodel.webelements.TextElement;
 import com.gurukula.ui.pagemodel.webelements.TextField;
 import org.openqa.selenium.By;
 
 public class LoginPage extends GurukulaPage {
-    TextField loginTextField;
-    TextField passwordTextField;
-    CheckBox automaticLoginCheckBox;
-    Button submitButton;
+    public TextElement loginError;
+    public TextField loginTextField;
+    public TextField passwordTextField;
+    public CheckBox automaticLoginCheckBox;
+    public Button submitButton;
 
     public LoginPage(Selenium sel) {
         super(sel);
+        path = "/#/login";
+        loginError = new TextElement(sel, By.xpath("//div[@translate='login.messages.error.authentication']/strong"));
         loginTextField = new TextField(sel, By.id("username"));
         passwordTextField = new TextField(sel, By.id("password"));
         automaticLoginCheckBox = new CheckBox(sel, By.id("rememberMe"));
@@ -23,8 +27,8 @@ public class LoginPage extends GurukulaPage {
     }
 
     public GurukulaPage login(String username, String password) {
-        loginTextField.type(username);
-        passwordTextField.type(password);
+        loginTextField.clear().type(username);
+        passwordTextField.clear().type(password);
         submitButton.click();
         return this;
     }
@@ -39,6 +43,12 @@ public class LoginPage extends GurukulaPage {
     }
 
     public WebPage waitForPageLoad() {
+        // TODO - Adding a little sleep to help things along when waiting for elements to show up on the page
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         loginTextField.waitForPresentAndVisible(pageWaitTime);
         passwordTextField.waitForPresentAndVisible(pageWaitTime);
         automaticLoginCheckBox.waitForPresentAndVisible(pageWaitTime);

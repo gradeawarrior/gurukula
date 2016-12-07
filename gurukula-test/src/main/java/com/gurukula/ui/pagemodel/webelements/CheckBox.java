@@ -12,4 +12,9 @@ public class CheckBox extends Element{
         waitForPresentAndVisible();
         sel.click(locator);
     }
+
+    public boolean isSelected() {
+        waitForPresentAndVisible();
+        return sel.isSelected(locator);
+    }
 }

@@ -3,9 +3,9 @@ Test Plan
 
 ##  Highlevel assumptions
 
-* Ensure no broken links or images
-* Ensure page is formatted correctly
-* Webpage should load in a reasonable amount of time (assume < 3-5sec)
+* Ensure no broken links or images (**PASS - automated**)
+* Ensure page is formatted correctly (**PASS - automated**)
+* Webpage should load in a reasonable amount of time (assume < 3-5sec) (**Automated to check load times within 30sec**)
 * Zero page errors:
 	* javascript errors
 	* Check for 404's (not found)
@@ -22,13 +22,13 @@ Test Plan
 
 ### Authentication
 
-* Login with valid username valid password ==> login success
-* Login with invalid username valid password ==> login fail
-* Login with valid username invalid password ==> login fail
-* Login with invalid username invalid password ==> login fail
+* Login with valid username valid password ==> login success (**PASS - automated**)
+* Login with invalid username valid password ==> login fail (**PASS - automated**)
+* Login with valid username invalid password ==> login fail (**PASS - automated**)
+* Login with invalid username invalid password ==> login fail (**PASS - automated**)
 * Login with javascript alert as username == login fail and no alert
 * Login with javascript alert as password ==> login fail
-* Repeated failed logins ==> user should be locked eventually
+* Repeated failed logins ==> user should be locked eventually (**FAIL - manual**)
 
 ### Account Registration
 

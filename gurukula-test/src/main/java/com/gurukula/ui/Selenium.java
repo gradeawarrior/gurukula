@@ -45,6 +45,8 @@ public interface Selenium extends com.thoughtworks.selenium.Selenium {
 
     public Selenium type(Object locator, String txt);
 
+    public Selenium clear(Object locator);
+
     public String getText(Object locator);
 
     public Object getElement(Object locator);
@@ -54,5 +56,4 @@ public interface Selenium extends com.thoughtworks.selenium.Selenium {
     public long getPageTimeout();
 
     public long getElementTimeout();
-
 }

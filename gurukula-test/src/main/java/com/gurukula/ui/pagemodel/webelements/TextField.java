@@ -1,6 +1,7 @@
 package com.gurukula.ui.pagemodel.webelements;
 
 import com.gurukula.ui.Selenium;
+import org.apache.commons.lang.NotImplementedException;
 import org.openqa.selenium.By;
 
 public class TextField extends Element {
@@ -11,6 +12,11 @@ public class TextField extends Element {
 
     public void type(String txt) {
         sendKeys(txt);
+    }
+
+    public TextField clear() {
+        sel.clear(locator);
+        return this;
     }
 
     public void sendKeys(String txt) {

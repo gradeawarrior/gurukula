@@ -32,7 +32,7 @@ public class SeleniumWebdriver extends RemoteWebDriver implements Selenium {
     }
 
     protected void setTimeouts() {
-//        driver.manage().timeouts().implicitlyWait(elementWaitTime, TimeUnit.MILLISECONDS);
+        driver.manage().timeouts().implicitlyWait(elementTimeout, TimeUnit.MILLISECONDS);
         if (!(driver instanceof HtmlUnitDriver))
             driver.manage().timeouts().pageLoadTimeout(pageTimeout, TimeUnit.MILLISECONDS);
     }
@@ -683,8 +683,8 @@ public class SeleniumWebdriver extends RemoteWebDriver implements Selenium {
 
     public boolean isPresent(Object locator) {
         try {
-            // TODO - Apparently setting to 0 does not actually trigger a timeout immediately. Could be a communication issue using RemoteWebDriver
-            waitForPresent(locator, 3000);
+            // TODO - Apparently setting to 0 does not actually trigger a timeout immediately.
+            waitForPresent(locator, 0);
             this.driver.findElement((By) locator);
             return true;
         } catch (TimeoutException e) {
@@ -695,19 +695,19 @@ public class SeleniumWebdriver extends RemoteWebDriver implements Selenium {
     }
 
     public boolean isVisible(Object locator) {
-        return isDisplayed(locator);
-    }
-
-    public boolean isDisplayed(Object locator) {
         try {
-            // TODO - Apparently setting to 0 does not actually trigger a timeout immediately. Could be a communication issue using RemoteWebDriver
-            waitForVisible(locator, 3000);
-            return this.driver.findElement((By) locator).isDisplayed();
+            // TODO - Apparently setting to 0 does not actually trigger a timeout immediately.
+            waitForVisible(locator, 0);
+            return true;
         } catch (TimeoutException e) {
             return false;
         } catch (NotFoundException e) {
             return false;
         }
+    }
+
+    public boolean isDisplayed(Object locator) {
+        return this.driver.findElement((By) locator).isDisplayed();
     }
 
     public boolean isEnabled(Object locator) {
@@ -756,6 +756,11 @@ public class SeleniumWebdriver extends RemoteWebDriver implements Selenium {
 
     public Selenium type(Object locator, String txt) {
         driver.findElement((By) locator).sendKeys(txt);
+        return this;
+    }
+
+    public Selenium clear(Object locator) {
+        driver.findElement((By) locator).clear();
         return this;
     }
 

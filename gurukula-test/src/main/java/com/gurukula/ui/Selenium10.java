@@ -106,6 +106,10 @@ public class Selenium10 extends DefaultSelenium implements Selenium {
         return this;
     }
 
+    public Selenium clear(Object locator) {
+        throw new NotImplementedException();
+    }
+
     public String getText(Object locator) {
         return super.getText(locator.toString());
     }
