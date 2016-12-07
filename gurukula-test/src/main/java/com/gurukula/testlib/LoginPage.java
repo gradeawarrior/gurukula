@@ -43,12 +43,7 @@ public class LoginPage extends GurukulaPage {
     }
 
     public WebPage waitForPageLoad() {
-        // TODO - Adding a little sleep to help things along when waiting for elements to show up on the page
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        super.waitForPageLoad();
         loginTextField.waitForPresentAndVisible(pageWaitTime);
         passwordTextField.waitForPresentAndVisible(pageWaitTime);
         automaticLoginCheckBox.waitForPresentAndVisible(pageWaitTime);
@@ -58,6 +53,7 @@ public class LoginPage extends GurukulaPage {
     }
 
     public void validate() {
+        super.validate();
         loginTextField.presentAndVisible();
         passwordTextField.presentAndVisible();
         automaticLoginCheckBox.presentAndVisible();

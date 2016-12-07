@@ -21,10 +21,7 @@ public class RegistrationPage extends GurukulaPage {
     public RegistrationPage(Selenium sel) {
         super(sel);
         path = "/#/register";
-        setWebElements();
-    }
-
-    protected void setWebElements() {
+        
         errorMessage = new TextElement(sel, By.xpath("//div[@translate='register.messages.error.fail']/strong"));
         minPasswordMessage = new TextElement(sel, By.xpath("//p[@translate='global.messages.validate.newpassword.minlength']"));
         invalidEmailMessage = new TextElement(sel, By.xpath("//p[@translate='global.messages.validate.email.invalid']"));
@@ -49,6 +46,7 @@ public class RegistrationPage extends GurukulaPage {
     }
 
     public void validate() {
+        super.validate();
         headerWidget.validate();
         loginField.presentAndVisible();
         emailField.presentAndVisible();

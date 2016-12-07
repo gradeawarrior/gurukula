@@ -2,19 +2,45 @@ package com.gurukula.testlib;
 
 import com.gurukula.ui.Selenium;
 import com.gurukula.ui.pagemodel.WebPage;
+import com.gurukula.ui.pagemodel.webelements.Button;
+import com.gurukula.ui.pagemodel.webelements.DropDown;
+import com.gurukula.ui.pagemodel.webelements.TextField;
 import org.apache.commons.lang.NotImplementedException;
+import org.openqa.selenium.By;
 
-public class SettingsPage extends WebPage {
+public class SettingsPage extends GurukulaPage {
+    public TextField firstNameTextField;
+    public TextField lastNameTextField;
+    public TextField emailTextField;
+    public DropDown languageDropDown;
+    public Button saveButton;
 
     public SettingsPage(Selenium sel) {
         super(sel);
+        path = "/#/settings";
+        firstNameTextField = new TextField(sel, By.name("firstName"));
+        lastNameTextField = new TextField(sel, By.name("lastName"));
+        emailTextField = new TextField(sel, By.name("email"));
+        languageDropDown = new DropDown(sel, By.name("langKey"));
+        saveButton = new Button(sel, By.xpath("//button[@translate='settings.form.button']"));
     }
 
     public WebPage waitForPageLoad() {
-        throw new NotImplementedException();
+        super.waitForPageLoad();
+        firstNameTextField.waitForPresentAndVisible(pageWaitTime);
+        lastNameTextField.waitForPresentAndVisible(pageWaitTime);
+        emailTextField.waitForPresentAndVisible(pageWaitTime);
+        languageDropDown.waitForPresentAndVisible(pageWaitTime);
+        saveButton.waitForPresentAndVisible(pageWaitTime);
+        return this;
     }
 
     public void validate() {
-        throw new NotImplementedException();
+        super.validate();
+        firstNameTextField.presentAndVisible();
+        lastNameTextField.presentAndVisible();
+        emailTextField.presentAndVisible();
+        languageDropDown.presentAndVisible();
+        saveButton.presentAndVisible();
     }
 }
