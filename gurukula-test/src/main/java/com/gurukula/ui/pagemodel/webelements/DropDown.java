@@ -6,11 +6,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 public class DropDown extends Element {
-    protected Select select;
+    protected Select select = null;
 
     public DropDown(Selenium sel, Object locator) {
         super(sel, locator);
-        select = new Select((WebElement) sel.getElement(locator));
+    }
+
+    protected void instantiateSelect() {
+        if (select == null) {
+            select = new Select((WebElement) sel.getElement(locator));
+        }
     }
 
     public int countOptions() {
@@ -19,11 +24,13 @@ public class DropDown extends Element {
     }
 
     public DropDown selectByVisibleText(String txt) {
+        instantiateSelect();
         select.selectByVisibleText(txt);
         return this;
     }
 
     public DropDown selectByIndex(int index) {
+        instantiateSelect();
         select.selectByIndex(index);
         return this;
     }

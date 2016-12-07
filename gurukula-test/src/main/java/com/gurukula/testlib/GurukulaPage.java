@@ -45,6 +45,6 @@ public class GurukulaPage extends WebPage {
     }
 
     public void validate() {
-        throw new NotImplementedException();
+        headerWidget.validate();
     }
 }

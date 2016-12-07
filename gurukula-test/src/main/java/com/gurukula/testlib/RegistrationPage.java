@@ -21,7 +21,7 @@ public class RegistrationPage extends GurukulaPage {
     public RegistrationPage(Selenium sel) {
         super(sel);
         path = "/#/register";
-        
+
         errorMessage = new TextElement(sel, By.xpath("//div[@translate='register.messages.error.fail']/strong"));
         minPasswordMessage = new TextElement(sel, By.xpath("//p[@translate='global.messages.validate.newpassword.minlength']"));
         invalidEmailMessage = new TextElement(sel, By.xpath("//p[@translate='global.messages.validate.email.invalid']"));
@@ -36,12 +36,12 @@ public class RegistrationPage extends GurukulaPage {
 
     public RegistrationPage waitForPageLoad() {
         super.waitForPageLoad();
-        loginField.waitForPresentAndVisible();
-        emailField.waitForPresentAndVisible();
-        passwordField.waitForPresentAndVisible();
-        passwordConfirmField.waitForPresentAndVisible();
-        registerButton.waitForPresentAndVisible();
-        loginWidget.loginLink.waitForPresentAndVisible();
+        loginField.waitForPresentAndVisible(pageWaitTime);
+        emailField.waitForPresentAndVisible(pageWaitTime);
+        passwordField.waitForPresentAndVisible(pageWaitTime);
+        passwordConfirmField.waitForPresentAndVisible(pageWaitTime);
+        registerButton.waitForPresentAndVisible(pageWaitTime);
+        loginWidget.loginLink.waitForPresentAndVisible(pageWaitTime);
         return this;
     }
 
