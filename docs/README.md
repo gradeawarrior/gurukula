@@ -10,6 +10,7 @@ Test Plan
 	* javascript errors
 	* Check for 404's (not found)
 	* Check for 401's (unauthorized)
+	* Check for 500's (Server Error)
 
 ## Features
 
@@ -59,12 +60,15 @@ Test Plan
 ### Staff and Branches
 
 * Staff
-	* Creation of Staff
-	* View of a Staff
-	* Edit of a Staff
-	* Listing of all Staff
-	* Proper paging of staff when over 5 staff
-	* Delete a Staff
+	* Creation of Staff (**PASS** - automated)
+	* View of a Staff (**PASS**)
+	* Edit of a Staff (**PASS**)
+	* Listing of all Staff (**PASS** - automated)
+	* Proper paging of staff when over 5 staff (**FAIL** - automated)
+	* Delete a Staff (**PASS**)
+	* Search for a non-existent staff (**PASS**)
+	* Search for an existing staff exact match (case-insensitive) (**PASS**)
+	* Search for an existing staff subString - _Example: Bill versus Billy_ (**FAIL**)
 * Branches
 	* Creation of a Branch (**PASS** - automated)
 	* View of a Branch (**PASS**)
@@ -73,6 +77,9 @@ Test Plan
 	* Proper paging of branches when over 5 branches (**FAIL** - automated)
 	* Deletion of a Branch (with Staff) (**FAIL**)
 	* Deletion of a Branch (without Staff) (**PASS**)
+	* Search for a non-existent branch (**PASS**)
+	* Search for an existing branch exact match (case-insensitive) (**PASS**)
+	* Search for an existing branch subString - _Example: Bill versus Billy_  (**FAIL**)
 
 ## Session Management
 

@@ -89,6 +89,7 @@ test.load: check.version
 	$(info test.load)
 	$(info ******************)
 	make test.load.ab
+	make test.load.grinder
 
 test.load.ab: test.sanity
 	$(info ******************)

@@ -18,16 +18,16 @@ This project was developed on a Mac, and therefore several of the Make targets r
 * `bash`
 * `make`
 * `Java 8`
+* `curl`
 * Latest version of Firefox
 * [Apache Maven](https://maven.apache.org/)
 * [Homebrew](http://brew.sh/)
 
-_**WARNING:**_ _The `Makefile` ensures that all operations are running using Java 8. This is a basic pre-requisites for both running and testing the service_
+_**WARNING:**_ _The `Makefile` ensures that all operations are running using Java 8. This is a basic pre-requisite for both running and testing the service_
 
 ### Optional Installation
 
 * [jEnv](http://www.jenv.be/) (Manage your Java Environment)
-* `curl`
 
 ## Getting Started
 
@@ -56,6 +56,25 @@ The service takes awhile to get started, so there is an included "sanity" test t
 ### Functional tests (GUI)
 
 The automated functional tests can be run using `make test`. These tests will launch a real browser using Selenium. The Selenium server is required to be running (see above on how to start).
+
+Right now, the following browser types are supported for the Selenium GUI tests:
+
+1. firefox (default)
+2. headless
+
+_**NOTE:** There were issues encountered trying to use the HTMLUnit for headless browser testing, so it is not recommended that it be used right now. Please execute right now using only the default `firefox` browser type._
+
+### Performance tests
+
+Some load/performance testing tools were evaluated. What is automated right now is a basic load generation on the Homepage unauthenticated.
+
+To execute the [Apache Bench](http://httpd.apache.org/docs/2.4/programs/ab.html) tests:
+
+	make test.load.ab
+	
+Similarly, to execute [The Grinder](https://github.com/gradeawarrior/mavenized-grinder) tests:
+
+	make test.load.grinder
 
 
 ## Testing

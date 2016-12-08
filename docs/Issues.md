@@ -14,8 +14,10 @@ Below are the list of defects/improvements found through my testing. These of co
 1. **Registration** - User registration does not work
 2. **Staff** - paging does not work - _**Expected:** paging after 5 staff_
 3. **Staff** - The drop-down list of branches for assigning a branch to a staff does not scale as the number of branches increases. I imagine when there are 20 or more branches in the system, this will be difficult for a user to select the appropriate branch.
-4. **Data Persistence** - Looks like data is not persisted to a Database. It looks like the data disappears after some amount of time (~1hr). I suspect if I restart the server, this problem will also manifest.
-5. **Settings** - Unable to save any settings.
+4. **Branch** - No error message when attempting to delete a Branch that has Staff associated with it. It looks like behind the scenes is a call to /api/branches/<id>; this is returning 500 Internal Server Error
+5. **Data Persistence** - Looks like data is not persisted to a Database. It looks like the data disappears after some amount of time (~1hr). I suspect if I restart the server, this problem will also manifest.
+6. **Settings** - Unable to save any settings.
+7. **Password** - Unable to update password
 
 ### Improvements
 
