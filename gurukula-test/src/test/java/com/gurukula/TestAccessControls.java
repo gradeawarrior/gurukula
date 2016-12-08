@@ -27,6 +27,7 @@ public class TestAccessControls {
     static StaffsPage staffsPage = null;
     static SessionsPage sessionsPage = null;
     static SettingsPage settingsPage = null;
+    static PasswordPage passwordPage = null;
 
     @BeforeClass
     public void classSetUp() throws Exception {
@@ -60,6 +61,7 @@ public class TestAccessControls {
             staffsPage = new StaffsPage(sel);
             sessionsPage = new SessionsPage(sel);
             settingsPage = new SettingsPage(sel);
+            passwordPage = new PasswordPage(sel);
         } catch (Exception e) {
             if (sel != null)
                 sel.quit();
@@ -85,8 +87,15 @@ public class TestAccessControls {
         loginPage.waitForPageLoad().validate();
     }
 
+    @Test(groups = "unauthenticated")
     public void testSettingsPageUnauthenticated() throws URISyntaxException {
         settingsPage.open();
+        loginPage.waitForPageLoad().validate();
+    }
+
+    @Test(groups = "unauthenticated")
+    public void testPasswordPageUnauthenticated() throws URISyntaxException {
+        passwordPage.open();
         loginPage.waitForPageLoad().validate();
     }
 
@@ -119,6 +128,12 @@ public class TestAccessControls {
     public void testSettingsPageAuthenticated() throws URISyntaxException {
         settingsPage.open();
         settingsPage.waitForPageLoad().validate();
+    }
+
+    @Test(dependsOnGroups = "authenticated")
+    public void testPasswordPageAuthenticated() throws URISyntaxException {
+        passwordPage.open();
+        passwordPage.waitForPageLoad().validate();
     }
 
     @AfterClass

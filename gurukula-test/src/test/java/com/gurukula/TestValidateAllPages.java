@@ -28,6 +28,7 @@ public class TestValidateAllPages {
     static RegistrationPage registrationPage = null;
     static SessionsPage sessionsPage = null;
     static SettingsPage settingsPage = null;
+    static PasswordPage passwordPage = null;
 
     @BeforeClass
     public void classSetUp() throws Exception {
@@ -62,6 +63,7 @@ public class TestValidateAllPages {
             registrationPage = new RegistrationPage(sel);
             sessionsPage = new SessionsPage(sel);
             settingsPage = new SettingsPage(sel);
+            passwordPage = new PasswordPage(sel);
         } catch (Exception e) {
             if (sel != null)
                 sel.quit();
@@ -118,6 +120,12 @@ public class TestValidateAllPages {
     public void testSessionsPage() throws URISyntaxException {
         sessionsPage.open();
         sessionsPage.waitForPageLoad().validate();
+    }
+
+    @Test(dependsOnGroups = "authenticated")
+    public void testPasswordPage() throws URISyntaxException {
+        passwordPage.open();
+        passwordPage.waitForPageLoad().validate();
     }
 
     @AfterClass
