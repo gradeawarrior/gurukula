@@ -9,9 +9,9 @@ import org.apache.commons.lang.NotImplementedException;
 import org.openqa.selenium.By;
 
 public class StaffsPage extends GurukulaPage {
-    Button createStaffButton;
-    CreateEditStaffWidget createEditStaffWidget;
-    Table staffsTable;
+    public Button createStaffButton;
+    public CreateEditStaffWidget createEditStaffWidget;
+    public Table staffsTable;
 
     public StaffsPage(Selenium sel) {
         super(sel);

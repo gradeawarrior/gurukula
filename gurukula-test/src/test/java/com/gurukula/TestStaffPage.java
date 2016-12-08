@@ -1,7 +1,10 @@
 package com.gurukula;
 
 import com.google.common.base.Preconditions;
-import com.gurukula.testlib.*;
+import com.gurukula.testlib.BranchPage;
+import com.gurukula.testlib.HomePageAuthenticated;
+import com.gurukula.testlib.LoginPage;
+import com.gurukula.testlib.StaffsPage;
 import com.gurukula.ui.Selenium;
 import com.gurukula.ui.SeleniumWebdriver;
 import org.apache.commons.lang.RandomStringUtils;
@@ -20,13 +23,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestBranchPage {
+public class TestStaffPage {
     static Selenium sel = null;
     static String gurukulaURL = "http://localhost:8080";
 
     static HomePageAuthenticated homePageAuthenticated = null;
     static LoginPage loginPage = null;
     static BranchPage branchPage = null;
+    static StaffsPage staffsPage = null;
     static List<String> branches = new ArrayList<String>(5);
 
     @BeforeClass
@@ -57,6 +61,7 @@ public class TestBranchPage {
             homePageAuthenticated = new HomePageAuthenticated(sel);
             loginPage = new LoginPage(sel);
             branchPage = new BranchPage(sel);
+            staffsPage = new StaffsPage(sel);
 
             // Login
             loginPage.open();
@@ -69,58 +74,56 @@ public class TestBranchPage {
         }
     }
 
-    @Test(groups = "openBranch")
-    public void testOpenBranchPage() throws URISyntaxException {
-        branchPage.open();
-        branchPage.waitForPageLoad().validate();
-        Assert.assertEquals(branchPage.branchesTable.countRows() >= 0, true, "Expect there to be a table with 0 or more rows");
+    @Test(groups = "openStaff")
+    public void testOpenStaffPage() throws URISyntaxException {
+        staffsPage.open();
+        staffsPage.waitForPageLoad().validate();
+        Assert.assertEquals(staffsPage.staffsTable.countRows() >= 0, true, "Expect there to be a table with 0 or more rows");
     }
 
-    @Test(groups = "createOneBranch", dependsOnGroups = "openBranch")
-    public void testCreateBranch() throws URISyntaxException {
+    @Test(groups = "createOneStaff", dependsOnGroups = "openStaff")
+    public void testCreateStaff() throws URISyntaxException {
         // Load Page
-        branchPage.open();
-        branchPage.waitForPageLoad().validate();
-        int initialCount = branchPage.branchesTable.countRows();
+        staffsPage.open();
+        staffsPage.waitForPageLoad().validate();
+        int initialCount = staffsPage.staffsTable.countRows();
 
         // Create
-        branchPage.createBranchButton.click();
-        branchPage.createEditBranchWidget.waitForPresentAndVisible();
-        branchPage.createEditBranchWidget.nameField.clear().type(RandomStringUtils.random(20, true, false));
-        branchPage.createEditBranchWidget.codeField.clear().type(RandomStringUtils.random(10, true, true).toUpperCase());
-        branchPage.createEditBranchWidget.saveButton.click();
-        branchPage.waitForPageLoad().validate();
-        Assert.assertEquals(branchPage.branchesTable.countRows(), initialCount + 1);
+        staffsPage.createStaffButton.click();
+        staffsPage.createEditStaffWidget.waitForPresentAndVisible();
+        staffsPage.createEditStaffWidget.nameField.clear().type(RandomStringUtils.random(20, true, false));
+        staffsPage.createEditStaffWidget.saveButton.click();
+        staffsPage.waitForPageLoad().validate();
+        Assert.assertEquals(staffsPage.staffsTable.countRows(), initialCount + 1);
     }
 
-    @Test(groups = "sixBranches", dependsOnGroups = "createOneBranch")
-    public void testCreateSixBranches() throws URISyntaxException {
+    @Test(groups = "sixStaff", dependsOnGroups = "createOneStaff")
+    public void testCreateSixStaff() throws URISyntaxException {
         // Load Page
-        branchPage.open();
-        branchPage.waitForPageLoad().validate();
-        int count = branchPage.branchesTable.countRows();
+        staffsPage.open();
+        staffsPage.waitForPageLoad().validate();
+        int count = staffsPage.staffsTable.countRows();
         String branchName = null;
 
         // Create
         for (int i = 0; i < 6; i++) {
             branchName = RandomStringUtils.random(20, true, false);
-            branchPage.createBranchButton.click();
-            branchPage.createEditBranchWidget.waitForPresentAndVisible();
-            branchPage.createEditBranchWidget.nameField.clear().type(branchName);
-            branchPage.createEditBranchWidget.codeField.clear().type(RandomStringUtils.random(10, true, true).toUpperCase());
-            branchPage.createEditBranchWidget.saveButton.click();
-            branchPage.waitForPageLoad().validate();
-            Assert.assertEquals(branchPage.branchesTable.countRows(), ++count);
+            staffsPage.createStaffButton.click();
+            staffsPage.createEditStaffWidget.waitForPresentAndVisible();
+            staffsPage.createEditStaffWidget.nameField.clear().type(branchName);
+            staffsPage.createEditStaffWidget.saveButton.click();
+            staffsPage.waitForPageLoad().validate();
+            Assert.assertEquals(staffsPage.staffsTable.countRows(), ++count);
             branches.add(branchName);
         }
     }
 
-    @Test(dependsOnGroups = "sixBranches")
-    public void testPagingForEveryFiveBranches() throws URISyntaxException {
+    @Test(dependsOnGroups = "sixStaff")
+    public void testPagingForEveryFiveStaff() throws URISyntaxException {
         // Load Page
-        branchPage.open();
-        branchPage.waitForPageLoad().validate();
-        Assert.assertEquals(branchPage.branchesTable.countRows(), 5, "Expect that there are no more than 5  branches on a page!");
+        staffsPage.open();
+        staffsPage.waitForPageLoad().validate();
+        Assert.assertEquals(staffsPage.staffsTable.countRows(), 5, "Expect that there are no more than 5  branches on a page!");
     }
 
     @AfterClass
