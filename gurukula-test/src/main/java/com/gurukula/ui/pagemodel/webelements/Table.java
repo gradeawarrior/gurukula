@@ -13,7 +13,7 @@ public class Table extends Element {
     }
 
     public List<WebElement> getRows() {
-        return sel.getElements(By.tagName("tr"));
+        return sel.getElements(By.xpath("//tbody/tr"));
     }
 
     public int countRows() {

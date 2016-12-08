@@ -50,11 +50,11 @@ Test Plan
 
 ### Account Management
 
-* User can change first name
-* User can change last name
-* User can change email
-* User can change language
-* User can change password
+* User can change first name (**FAIL** - automated)
+* User can change last name (**SKIPPED**)
+* User can change email (**SKIPPED**)
+* User can change language (**SKIPPED**)
+* User can change password (**FAIL** - automated)
 
 ### Staff and Branches
 
@@ -63,14 +63,16 @@ Test Plan
 	* View of a Staff
 	* Edit of a Staff
 	* Listing of all Staff
+	* Proper paging of staff when over 5 staff
 	* Delete a Staff
 * Branches
-	* Creation of a Branch
-	* View of a Branch
-	* Edit of a Branch
-	* Listing of all Branches
-	* Deletion of a Branch (with Staff)
-	* Deletion of a Branch (without Staff)
+	* Creation of a Branch (**PASS** - automated)
+	* View of a Branch (**PASS**)
+	* Edit of a Branch (**PASS**)
+	* Listing of all Branches (**PASS** - automated)
+	* Proper paging of branches when over 5 branches (**FAIL** - automated)
+	* Deletion of a Branch (with Staff) (**FAIL**)
+	* Deletion of a Branch (without Staff) (**PASS**)
 
 ## Session Management
 

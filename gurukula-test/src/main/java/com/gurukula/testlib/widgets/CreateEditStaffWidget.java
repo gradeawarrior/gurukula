@@ -8,12 +8,12 @@ import com.gurukula.ui.pagemodel.webelements.Widget;
 import org.openqa.selenium.By;
 
 public class CreateEditStaffWidget extends Widget {
-    TextField idField;
-    TextField nameField;
-    DropDown branchDropdown;
-    Button cancelButton;
-    Button saveButton;
-    Button closeButton;
+    public TextField idField;
+    public TextField nameField;
+    public DropDown branchDropdown;
+    public Button cancelButton;
+    public Button saveButton;
+    public Button closeButton;
 
     public CreateEditStaffWidget(Selenium sel, Object locator) {
         super(sel, locator);
