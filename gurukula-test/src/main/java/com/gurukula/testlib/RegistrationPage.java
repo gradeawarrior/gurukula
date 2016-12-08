@@ -7,16 +7,16 @@ import com.gurukula.ui.pagemodel.webelements.TextField;
 import org.openqa.selenium.By;
 
 public class RegistrationPage extends GurukulaPage {
-    TextElement errorMessage;
-    TextElement minPasswordMessage;
-    TextElement invalidEmailMessage;
-    TextElement minCharacterEmailMessage;
+    public TextElement errorMessage;
+    public TextElement minPasswordMessage;
+    public TextElement invalidEmailMessage;
+    public TextElement minCharacterEmailMessage;
 
-    TextField loginField;
-    TextField emailField;
-    TextField passwordField;
-    TextField passwordConfirmField;
-    Button registerButton;
+    public TextField loginField;
+    public TextField emailField;
+    public TextField passwordField;
+    public TextField passwordConfirmField;
+    public Button registerButton;
 
     public RegistrationPage(Selenium sel) {
         super(sel);

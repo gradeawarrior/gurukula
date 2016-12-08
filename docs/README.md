@@ -36,17 +36,17 @@ Test Plan
 * Register a valid account (**FAIL** - automated)
 * Attempt to Register an existing account (**SKIPPED**)
 * Check that all fields are required:
-	* Missing login (**PASS**)
-	* Missing email (**PASS**)
-	* Missing password (**PASS**)
-	* Missing password confirmation (**PASS**)
+	* Missing login (**PASS** - automated)
+	* Missing email (**PASS** - automated)
+	* Missing password (**PASS** - automated)
+	* Missing password confirmation (**PASS** - automated)
 * Test password strength
-	* What is minimum length? (5 characters) (**PASS**)
-	* Are there enforced policies like multi-case, #'s, and special characters? (No) (**PASS**)
-	* Dictionary words acceptable? (Yes)
+	* What is minimum length? (5 characters) (**PASS** - automated)
+	* Are there enforced policies like multi-case, #'s, and special characters? (No) (**SKIPPED**)
+	* Dictionary words acceptable? (Yes) (**SKIPPED**)
 * XSS checks
-* Email validation checks (**PASS**)
-* Check passwords match (**PASS**)
+* Email validation checks (**PASS** - automated)
+* Check passwords match (**SKIPPED**)
 
 ### Account Management
 
