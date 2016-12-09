@@ -13,13 +13,12 @@ public class CreateEditBranchWidget extends CreateEditStaffWidget{
     }
 
     public CreateEditBranchWidget waitForPresentAndVisible() {
-        return waitForPresentAndVisible(sel.getElementTimeout());
-    }
-
-    public CreateEditBranchWidget waitForPresentAndVisible(long waitTime) {
-        super.waitForPresentAndVisible(waitTime);
-        nameField.waitForPresentAndVisible(waitTime);
-        codeField.waitForPresentAndVisible(waitTime);
+        super.waitForPresentAndVisible(sel.getPageTimeout());
+        idField.waitForPresentAndVisible(sel.getPageTimeout());
+        nameField.waitForPresentAndVisible(sel.getPageTimeout());
+        codeField.waitForPresentAndVisible(sel.getPageTimeout());
+        saveButton.waitForPresentAndVisible(sel.getPageTimeout());
+        closeButton.waitForPresentAndVisible(sel.getPageTimeout());
         return this;
     }
 }

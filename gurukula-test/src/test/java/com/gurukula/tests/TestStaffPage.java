@@ -1,32 +1,20 @@
-package com.gurukula;
+package com.gurukula.tests;
 
-import com.google.common.base.Preconditions;
+import com.gurukula.GurukulaTest;
 import com.gurukula.testlib.BranchPage;
 import com.gurukula.testlib.HomePageAuthenticated;
 import com.gurukula.testlib.LoginPage;
 import com.gurukula.testlib.StaffsPage;
-import com.gurukula.ui.Selenium;
-import com.gurukula.ui.SeleniumWebdriver;
 import org.apache.commons.lang.RandomStringUtils;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestStaffPage {
-    static Selenium sel = null;
-    static String gurukulaURL = "http://localhost:8080";
-
+public class TestStaffPage extends GurukulaTest {
     static HomePageAuthenticated homePageAuthenticated = null;
     static LoginPage loginPage = null;
     static BranchPage branchPage = null;
@@ -35,28 +23,7 @@ public class TestStaffPage {
 
     @BeforeClass
     public void classSetUp() throws Exception {
-        String server = System.getProperty("selenium.server", "http://localhost:4444") + "/wd/hub";
-        gurukulaURL = System.getProperty("gurukula.url", "http://localhost:8080");
-        String browserType = System.getProperty("browser.type", "firefox");
-
-        Preconditions.checkNotNull(gurukulaURL, "Gurukula URL is not null!");
-        Preconditions.checkArgument(gurukulaURL.length() > 0, "Gurukula URL is not empty!");
         try {
-            // Specifying where the tests will run will be based on URL
-            WebDriver browser;
-            if (browserType.equals("firefox")) {
-                DesiredCapabilities capabilities = new DesiredCapabilities();
-                capabilities.setBrowserName("firefox");
-                browser = new RemoteWebDriver(new URL(server), capabilities);
-            } else if (browserType.equals("headless")) {
-                browser = new HtmlUnitDriver();
-            } else {
-                throw new UnsupportedOperationException("Cannot launch browserType: '" + browserType + "'!");
-            }
-
-            // Instantiate Selenium
-            sel = new SeleniumWebdriver(browser, new URI(gurukulaURL));
-
             // Instantiate all pages that will be visited
             homePageAuthenticated = new HomePageAuthenticated(sel);
             loginPage = new LoginPage(sel);
@@ -87,6 +54,7 @@ public class TestStaffPage {
         staffsPage.open();
         staffsPage.waitForPageLoad().validate();
         int initialCount = staffsPage.staffsTable.countRows();
+        int pageCount = (initialCount < 20) ? initialCount : 19;
 
         // Create
         staffsPage.createStaffButton.click();
@@ -94,41 +62,37 @@ public class TestStaffPage {
         staffsPage.createEditStaffWidget.nameField.clear().type(RandomStringUtils.random(20, true, false));
         staffsPage.createEditStaffWidget.saveButton.click();
         staffsPage.waitForPageLoad().validate();
-        Assert.assertEquals(staffsPage.staffsTable.countRows(), initialCount + 1);
+        Assert.assertEquals(staffsPage.staffsTable.countRows(), pageCount + 1);
     }
 
-    @Test(groups = "sixStaff", dependsOnGroups = "createOneStaff")
-    public void testCreateSixStaff() throws URISyntaxException {
+    @Test(groups = "20Staff", dependsOnGroups = "createOneStaff")
+    public void testCreateTwentyStaff() throws URISyntaxException {
         // Load Page
         staffsPage.open();
         staffsPage.waitForPageLoad().validate();
         int count = staffsPage.staffsTable.countRows();
         String branchName = null;
+        int pageCount = 0;
 
         // Create
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 20; i++) {
+            pageCount = (count < 20) ? count : 19;
             branchName = RandomStringUtils.random(20, true, false);
             staffsPage.createStaffButton.click();
             staffsPage.createEditStaffWidget.waitForPresentAndVisible();
             staffsPage.createEditStaffWidget.nameField.clear().type(branchName);
             staffsPage.createEditStaffWidget.saveButton.click();
             staffsPage.waitForPageLoad().validate();
-            Assert.assertEquals(staffsPage.staffsTable.countRows(), ++count);
+            Assert.assertEquals(staffsPage.staffsTable.countRows(), pageCount + 1);
             branches.add(branchName);
         }
     }
 
-    @Test(dependsOnGroups = "sixStaff")
-    public void testPagingForEveryFiveStaff() throws URISyntaxException {
+    @Test(dependsOnGroups = "20Staff")
+    public void testPagingForEveryTwentyStaff() throws URISyntaxException {
         // Load Page
         staffsPage.open();
         staffsPage.waitForPageLoad().validate();
-        Assert.assertEquals(staffsPage.staffsTable.countRows(), 5, "Expect that there are no more than 5  branches on a page!");
-    }
-
-    @AfterClass
-    public void classTearDown() {
-        if (sel != null)
-            sel.quit();
+        Assert.assertEquals(staffsPage.staffsTable.countRows(), 20, "Expect that there are no more than 20  branches on a page!");
     }
 }

@@ -26,17 +26,13 @@ public class CreateEditStaffWidget extends Widget {
     }
 
     public CreateEditStaffWidget waitForPresentAndVisible() {
-        return waitForPresentAndVisible(sel.getElementTimeout());
-    }
-
-    public CreateEditStaffWidget waitForPresentAndVisible(long waitTime) {
-        super.waitForPresentAndVisible(waitTime);
-        idField.waitForPresentAndVisible(waitTime);
-        nameField.waitForPresentAndVisible(waitTime);
-        branchDropdown.waitForPresentAndVisible(waitTime);
-        // cancelButton.waitForPresentAndVisible(waitTime);
-        saveButton.waitForPresentAndVisible(waitTime);
-        closeButton.waitForPresentAndVisible(waitTime);
+        super.waitForPresentAndVisible(sel.getPageTimeout());
+        idField.waitForPresentAndVisible(sel.getPageTimeout());
+        nameField.waitForPresentAndVisible(sel.getPageTimeout());
+        branchDropdown.waitForPresentAndVisible(sel.getPageTimeout());
+        // cancelButton.waitForPresentAndVisible(sel.getPageTimeout());
+        saveButton.waitForPresentAndVisible(sel.getPageTimeout());
+        closeButton.waitForPresentAndVisible(sel.getPageTimeout());
         return this;
     }
 

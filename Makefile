@@ -23,7 +23,9 @@ endif
 
 install.dependencies:
 	cd bin; curl -L https://github.com/mozilla/geckodriver/releases/download/v0.11.1/geckodriver-v0.11.1-macos.tar.gz > geckodriver-v0.11.1-macos.tar.gz
+	cd bin; curl -L https://chromedriver.storage.googleapis.com/2.25/chromedriver_mac64.zip > chromedriver_mac64.zip
 	cd bin; tar -xvzf geckodriver-v0.11.1-macos.tar.gz
+	cd bin; unzip chromedriver_mac64.zip
 	brew install selenium-server-standalone
 
 debug: check.version

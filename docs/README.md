@@ -64,7 +64,7 @@ Test Plan
 	* View of a Staff (**PASS**)
 	* Edit of a Staff (**PASS**)
 	* Listing of all Staff (**PASS** - automated)
-	* Proper paging of staff when over 5 staff (**FAIL** - automated)
+	* Proper paging of staff when over 20 staff (**PASS** - automated)
 	* Delete a Staff (**PASS**)
 	* Search for a non-existent staff (**PASS**)
 	* Search for an existing staff exact match (case-insensitive) (**PASS**)
