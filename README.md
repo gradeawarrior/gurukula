@@ -28,6 +28,7 @@ _**WARNING:**_ _The `Makefile` ensures that all operations are running using Jav
 ### Optional Installation
 
 * [jEnv](http://www.jenv.be/) (Manage your Java Environment)
+* [MacDown](http://macdown.uranusjr.com/) - A free Markdown reader for OSX
 
 ## Getting Started
 
