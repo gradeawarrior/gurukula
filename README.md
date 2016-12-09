@@ -39,7 +39,7 @@ Installing addition dependencies:
 
 	make install.dependencies
 	
-_**NOTE:** These will install the both the [ChromeDriver v2.25](https://sites.google.com/a/chromium.org/chromedriver/downloads) and [Gecko (Firefox) Driver v0.11.1](https://github.com/mozilla/geckodriver/releases) for MacOS. As long as you are using Mac and have the latest Firefox and Chrome installed, then no modifiations will need to be made to the Makefile. Otherwise, installation and starting the Selenium Service should work fine!_
+_**NOTE:** These will install both the [ChromeDriver v2.25](https://sites.google.com/a/chromium.org/chromedriver/downloads) and [Gecko (Firefox) Driver v0.11.1](https://github.com/mozilla/geckodriver/releases) for MacOS. As long as you are using Mac and have the latest Firefox and Chrome installed, then no modifiations will need to be made to the Makefile. Otherwise, installation and starting the Selenium Service should work fine!_
 	
 Start the selenium server:
 
@@ -63,12 +63,12 @@ Right now, the following browser types are supported for the Selenium GUI tests:
 
 1. firefox (default)
 2. chrome
-3. safari
-2. headless
+3. safari [^1]
+2. headless [^2]
 
-_**NOTE*:** [SafariDriver](https://github.com/SeleniumHQ/selenium/wiki/SafariDriver) requires explicitly installing the plugin on Safari. Please see [SafariDriver](https://github.com/SeleniumHQ/selenium/wiki/SafariDriver) instructions on their website._
+[^1]: [SafariDriver](https://github.com/SeleniumHQ/selenium/wiki/SafariDriver) requires explicitly installing the plugin on Safari. Please see [SafariDriver](https://github.com/SeleniumHQ/selenium/wiki/SafariDriver) instructions on their website.
 
-_**NOTE\**:** There were issues encountered trying to use the HTMLUnit for headless browser testing, so it is not recommended that it be used right now. Please execute right now using only the default `firefox` browser type._
+[^2]: There were issues encountered trying to use the HTMLUnit for headless browser testing, so it is not recommended that it be used right now. Please execute using the other browser types.
 
 To execute a test against the `chrome` browser:
 
