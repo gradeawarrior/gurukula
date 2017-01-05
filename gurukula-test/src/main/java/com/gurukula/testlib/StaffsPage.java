@@ -1,11 +1,10 @@
 package com.gurukula.testlib;
 
+import com.github.seleniumpm.Selenium;
+import com.github.seleniumpm.pagemodel.WebPage;
+import com.github.seleniumpm.pagemodel.webelements.Button;
+import com.github.seleniumpm.pagemodel.webelements.Table;
 import com.gurukula.testlib.widgets.CreateEditStaffWidget;
-import com.gurukula.ui.Selenium;
-import com.gurukula.ui.pagemodel.WebPage;
-import com.gurukula.ui.pagemodel.webelements.Button;
-import com.gurukula.ui.pagemodel.webelements.Table;
-import org.apache.commons.lang.NotImplementedException;
 import org.openqa.selenium.By;
 
 public class StaffsPage extends GurukulaPage {

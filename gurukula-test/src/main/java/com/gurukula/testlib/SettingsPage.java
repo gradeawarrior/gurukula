@@ -1,10 +1,10 @@
 package com.gurukula.testlib;
 
-import com.gurukula.ui.Selenium;
-import com.gurukula.ui.pagemodel.WebPage;
-import com.gurukula.ui.pagemodel.webelements.Button;
-import com.gurukula.ui.pagemodel.webelements.DropDown;
-import com.gurukula.ui.pagemodel.webelements.TextField;
+import com.github.seleniumpm.Selenium;
+import com.github.seleniumpm.pagemodel.WebPage;
+import com.github.seleniumpm.pagemodel.webelements.Button;
+import com.github.seleniumpm.pagemodel.webelements.DropDown;
+import com.github.seleniumpm.pagemodel.webelements.TextField;
 import org.apache.commons.lang.NotImplementedException;
 import org.openqa.selenium.By;
 

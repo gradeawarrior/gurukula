@@ -1,12 +1,12 @@
 package com.gurukula.testlib;
 
 import com.gurukula.testlib.GurukulaPage;
-import com.gurukula.ui.Selenium;
-import com.gurukula.ui.pagemodel.WebPage;
-import com.gurukula.ui.pagemodel.webelements.Button;
-import com.gurukula.ui.pagemodel.webelements.CheckBox;
-import com.gurukula.ui.pagemodel.webelements.TextElement;
-import com.gurukula.ui.pagemodel.webelements.TextField;
+import com.github.seleniumpm.Selenium;
+import com.github.seleniumpm.pagemodel.WebPage;
+import com.github.seleniumpm.pagemodel.webelements.Button;
+import com.github.seleniumpm.pagemodel.webelements.CheckBox;
+import com.github.seleniumpm.pagemodel.webelements.TextElement;
+import com.github.seleniumpm.pagemodel.webelements.TextField;
 import org.openqa.selenium.By;
 
 public class LoginPage extends GurukulaPage {

@@ -1,8 +1,8 @@
 package com.gurukula.poc;
 
 import com.gurukula.poc.testlib.GooglePageWebDriver;
-import com.gurukula.ui.Selenium;
-import com.gurukula.ui.SeleniumWebdriver;
+import com.github.seleniumpm.Selenium;
+import com.github.seleniumpm.SeleniumWebdriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;

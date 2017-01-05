@@ -1,8 +1,8 @@
 package com.gurukula.poc.testlib;
 
-import com.gurukula.ui.Selenium;
-import com.gurukula.ui.pagemodel.WebPage;
-import com.gurukula.ui.pagemodel.webelements.TextField;
+import com.github.seleniumpm.Selenium;
+import com.github.seleniumpm.pagemodel.WebPage;
+import com.github.seleniumpm.pagemodel.webelements.TextField;
 
 public class GooglePage10 extends WebPage {
     public TextField searchField;

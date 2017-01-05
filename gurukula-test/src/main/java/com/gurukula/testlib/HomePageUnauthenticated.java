@@ -1,7 +1,7 @@
 package com.gurukula.testlib;
 
-import com.gurukula.ui.Selenium;
-import com.gurukula.ui.pagemodel.WebPage;
+import com.github.seleniumpm.Selenium;
+import com.github.seleniumpm.pagemodel.WebPage;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class HomePageUnauthenticated extends GurukulaPage {

@@ -1,8 +1,8 @@
 package com.gurukula.testlib.widgets;
 
-import com.gurukula.ui.Selenium;
-import com.gurukula.ui.pagemodel.webelements.Link;
-import com.gurukula.ui.pagemodel.webelements.Widget;
+import com.github.seleniumpm.Selenium;
+import com.github.seleniumpm.pagemodel.webelements.Link;
+import com.github.seleniumpm.pagemodel.webelements.Widget;
 import org.openqa.selenium.By;
 
 public class HeaderWidget extends Widget {

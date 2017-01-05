@@ -1,12 +1,10 @@
 package com.gurukula.testlib;
 
+import com.github.seleniumpm.Selenium;
+import com.github.seleniumpm.pagemodel.WebPage;
 import com.gurukula.testlib.widgets.AccountsWidget;
 import com.gurukula.testlib.widgets.HeaderWidget;
 import com.gurukula.testlib.widgets.LoginWidget;
-import com.gurukula.ui.Selenium;
-import com.gurukula.ui.pagemodel.WebPage;
-import com.gurukula.ui.pagemodel.webelements.Link;
-import org.apache.commons.lang.NotImplementedException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 

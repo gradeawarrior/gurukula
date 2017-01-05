@@ -1,8 +1,8 @@
 package com.gurukula;
 
 import com.google.common.base.Preconditions;
-import com.gurukula.ui.Selenium;
-import com.gurukula.ui.SeleniumWebdriver;
+import com.github.seleniumpm.Selenium;
+import com.github.seleniumpm.SeleniumWebdriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;

@@ -1,9 +1,9 @@
 package com.gurukula.testlib;
 
-import com.gurukula.ui.Selenium;
-import com.gurukula.ui.pagemodel.webelements.Button;
-import com.gurukula.ui.pagemodel.webelements.TextElement;
-import com.gurukula.ui.pagemodel.webelements.TextField;
+import com.github.seleniumpm.Selenium;
+import com.github.seleniumpm.pagemodel.webelements.Button;
+import com.github.seleniumpm.pagemodel.webelements.TextElement;
+import com.github.seleniumpm.pagemodel.webelements.TextField;
 import org.openqa.selenium.By;
 
 public class RegistrationPage extends GurukulaPage {

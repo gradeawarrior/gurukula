@@ -1,7 +1,7 @@
 package com.gurukula.testlib.widgets;
 
-import com.gurukula.ui.Selenium;
-import com.gurukula.ui.pagemodel.webelements.TextField;
+import com.github.seleniumpm.Selenium;
+import com.github.seleniumpm.pagemodel.webelements.TextField;
 import org.openqa.selenium.By;
 
 public class CreateEditBranchWidget extends CreateEditStaffWidget{

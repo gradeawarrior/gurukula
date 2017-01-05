@@ -1,8 +1,8 @@
 package com.gurukula.testlib;
 
-import com.gurukula.ui.Selenium;
-import com.gurukula.ui.pagemodel.WebPage;
-import com.gurukula.ui.pagemodel.webelements.Table;
+import com.github.seleniumpm.Selenium;
+import com.github.seleniumpm.pagemodel.WebPage;
+import com.github.seleniumpm.pagemodel.webelements.Table;
 import org.apache.commons.lang.NotImplementedException;
 import org.openqa.selenium.By;
 
