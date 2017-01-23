@@ -1,18 +1,18 @@
 package com.gurukula.testlib;
 
-import com.github.seleniumpm.Selenium;
-import com.github.seleniumpm.pagemodel.WebPage;
-import com.github.seleniumpm.pagemodel.webelements.Table;
-import org.apache.commons.lang.NotImplementedException;
+import com.github.seleniumpm.webelements.Table;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import java.net.URI;
 
 public class SessionsPage extends GurukulaPage{
     public Table activeSessionsTable;
 
-    public SessionsPage(Selenium sel) {
-        super(sel);
+    public SessionsPage(WebDriver driver, URI server) {
+        super(driver, server);
         path = "/#/sessions";
-        activeSessionsTable = new Table(sel, By.xpath("//div[contains(@class, 'table-responsive')]/table"));
+        activeSessionsTable = new Table(driver, By.xpath("//div[contains(@class, 'table-responsive')]/table"));
     }
 
     public SessionsPage waitForPageLoad() {

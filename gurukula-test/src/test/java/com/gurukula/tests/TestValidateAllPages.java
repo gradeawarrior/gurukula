@@ -22,18 +22,18 @@ public class TestValidateAllPages extends GurukulaTest {
     public void classSetUp() throws Exception {
         try {
             // Instantiate all pages that will be visited
-            homePageAuthenticated = new HomePageAuthenticated(sel);
-            homePageUnauthenticated = new HomePageUnauthenticated(sel);
-            loginPage = new LoginPage(sel);
-            branchPage = new BranchPage(sel);
-            staffsPage = new StaffsPage(sel);
-            registrationPage = new RegistrationPage(sel);
-            sessionsPage = new SessionsPage(sel);
-            settingsPage = new SettingsPage(sel);
-            passwordPage = new PasswordPage(sel);
+            homePageAuthenticated = new HomePageAuthenticated(browser, gurukulaURL);
+            homePageUnauthenticated = new HomePageUnauthenticated(browser, gurukulaURL);
+            loginPage = new LoginPage(browser, gurukulaURL);
+            branchPage = new BranchPage(browser, gurukulaURL);
+            staffsPage = new StaffsPage(browser, gurukulaURL);
+            registrationPage = new RegistrationPage(browser, gurukulaURL);
+            sessionsPage = new SessionsPage(browser, gurukulaURL);
+            settingsPage = new SettingsPage(browser, gurukulaURL);
+            passwordPage = new PasswordPage(browser, gurukulaURL);
         } catch (Exception e) {
-            if (sel != null)
-                sel.quit();
+            if (browser != null)
+                browser.quit();
             throw e;
         }
     }

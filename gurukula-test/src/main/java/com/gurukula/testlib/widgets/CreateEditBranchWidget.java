@@ -1,24 +1,24 @@
 package com.gurukula.testlib.widgets;
 
-import com.github.seleniumpm.Selenium;
-import com.github.seleniumpm.pagemodel.webelements.TextField;
+import com.github.seleniumpm.webelements.TextField;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 public class CreateEditBranchWidget extends CreateEditStaffWidget{
     public TextField codeField;
 
-    public CreateEditBranchWidget(Selenium sel, Object locator) {
-        super(sel, locator);
-        codeField = new TextField(sel, By.xpath("//input[@name='code']"));
+    public CreateEditBranchWidget(WebDriver driver, By locator) {
+        super(driver, locator);
+        codeField = new TextField(driver, By.xpath("//input[@name='code']"));
     }
 
     public CreateEditBranchWidget waitForPresentAndVisible() {
-        super.waitForPresentAndVisible(sel.getPageTimeout());
-        idField.waitForPresentAndVisible(sel.getPageTimeout());
-        nameField.waitForPresentAndVisible(sel.getPageTimeout());
-        codeField.waitForPresentAndVisible(sel.getPageTimeout());
-        saveButton.waitForPresentAndVisible(sel.getPageTimeout());
-        closeButton.waitForPresentAndVisible(sel.getPageTimeout());
+        super.waitForPresentAndVisible(pageWaitTime);
+        idField.waitForPresentAndVisible(pageWaitTime);
+        nameField.waitForPresentAndVisible(pageWaitTime);
+        codeField.waitForPresentAndVisible(pageWaitTime);
+        saveButton.waitForPresentAndVisible(pageWaitTime);
+        closeButton.waitForPresentAndVisible(pageWaitTime);
         return this;
     }
 }

@@ -19,15 +19,15 @@ public class TestLogin extends GurukulaTest {
     public void classSetUp() throws Exception {
         try {
             // Instantiate all pages that will be visited
-            homePageAuthenticated = new HomePageAuthenticated(sel);
-            homePageUnauthenticated = new HomePageUnauthenticated(sel);
-            loginPage = new LoginPage(sel);
+            homePageAuthenticated = new HomePageAuthenticated(browser, gurukulaURL);
+            homePageUnauthenticated = new HomePageUnauthenticated(browser, gurukulaURL);
+            loginPage = new LoginPage(browser, gurukulaURL);
 
             // Open Gurukula page
             homePageUnauthenticated.open();
         } catch (Exception e) {
-            if (sel != null)
-                sel.quit();
+            if (browser != null)
+                browser.quit();
             throw e;
         }
     }

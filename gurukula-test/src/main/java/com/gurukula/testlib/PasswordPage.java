@@ -1,10 +1,12 @@
 package com.gurukula.testlib;
 
-import com.github.seleniumpm.Selenium;
-import com.github.seleniumpm.pagemodel.webelements.Button;
-import com.github.seleniumpm.pagemodel.webelements.TextElement;
-import com.github.seleniumpm.pagemodel.webelements.TextField;
+import com.github.seleniumpm.webelements.Button;
+import com.github.seleniumpm.webelements.TextElement;
+import com.github.seleniumpm.webelements.TextField;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import java.net.URI;
 
 public class PasswordPage extends GurukulaPage {
     public TextElement errorMessage;
@@ -12,13 +14,13 @@ public class PasswordPage extends GurukulaPage {
     public TextField passwordConfirmField;
     public Button saveButton;
 
-    public PasswordPage(Selenium sel) {
-        super(sel);
+    public PasswordPage(WebDriver driver, URI server) {
+        super(driver, server);
         path = "/#/password";
-        errorMessage = new TextElement(sel, By.xpath("//div[@translate='password.messages.error']/strong"));
-        passwordField = new TextField(sel, By.name("password"));
-        passwordConfirmField = new TextField(sel, By.name("confirmPassword"));
-        saveButton = new Button(sel, By.xpath("//button[@type='submit']"));
+        errorMessage = new TextElement(driver, By.xpath("//div[@translate='password.messages.error']/strong"));
+        passwordField = new TextField(driver, By.name("password"));
+        passwordConfirmField = new TextField(driver, By.name("confirmPassword"));
+        saveButton = new Button(driver, By.xpath("//button[@type='submit']"));
     }
 
     public PasswordPage waitForPageLoad() {

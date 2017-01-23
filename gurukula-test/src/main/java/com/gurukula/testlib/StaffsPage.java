@@ -1,23 +1,25 @@
 package com.gurukula.testlib;
 
-import com.github.seleniumpm.Selenium;
-import com.github.seleniumpm.pagemodel.WebPage;
-import com.github.seleniumpm.pagemodel.webelements.Button;
-import com.github.seleniumpm.pagemodel.webelements.Table;
+import com.github.seleniumpm.WebPage;
+import com.github.seleniumpm.webelements.Button;
+import com.github.seleniumpm.webelements.Table;
 import com.gurukula.testlib.widgets.CreateEditStaffWidget;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import java.net.URI;
 
 public class StaffsPage extends GurukulaPage {
     public Button createStaffButton;
     public CreateEditStaffWidget createEditStaffWidget;
     public Table staffsTable;
 
-    public StaffsPage(Selenium sel) {
-        super(sel);
+    public StaffsPage(WebDriver driver, URI server) {
+        super(driver, server);
         path = "/#/staff";
-        createStaffButton = new Button(sel, By.xpath("//button/span[@translate='gurukulaApp.staff.home.createLabel']"));
-        createEditStaffWidget = new CreateEditStaffWidget(sel, By.name("editForm"));
-        staffsTable = new Table(sel, By.xpath("//div[contains(@class, 'table-responsive')]/table"));
+        createStaffButton = new Button(driver, By.xpath("//button/span[@translate='gurukulaApp.staff.home.createLabel']"));
+        createEditStaffWidget = new CreateEditStaffWidget(driver, By.name("editForm"));
+        staffsTable = new Table(driver, By.xpath("//div[contains(@class, 'table-responsive')]/table"));
     }
 
     public WebPage waitForPageLoad() {

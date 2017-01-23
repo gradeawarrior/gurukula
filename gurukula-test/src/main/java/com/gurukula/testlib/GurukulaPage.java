@@ -1,27 +1,22 @@
 package com.gurukula.testlib;
 
-import com.github.seleniumpm.Selenium;
-import com.github.seleniumpm.pagemodel.WebPage;
-import com.gurukula.testlib.widgets.AccountsWidget;
+import com.github.seleniumpm.WebPage;
 import com.gurukula.testlib.widgets.HeaderWidget;
 import com.gurukula.testlib.widgets.LoginWidget;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+import java.net.URI;
 
 public class GurukulaPage extends WebPage {
     public LoginWidget loginWidget;
     public HeaderWidget headerWidget;
 
-    public GurukulaPage(Selenium sel) {
-        super(sel);
-        loginWidget = new LoginWidget(sel, By.xpath("//div[contains(@class, 'col-md-8')]/div[@ng-switch='isAuthenticated()']"));
-        headerWidget = new HeaderWidget(sel, By.id("navbar-collapse"));
-    }
-
-    public GurukulaPage(Selenium sel, String path) {
-        super(sel, path);
-        loginWidget = new LoginWidget(sel, By.xpath("//div[contains(@class, 'col-md-8')]/div[@ng-switch='isAuthenticated()']"));
-        headerWidget = new HeaderWidget(sel, By.id("navbar-collapse"));
+    public GurukulaPage(WebDriver driver, URI server) {
+        super(driver, server);
+        loginWidget = new LoginWidget(driver, By.xpath("//div[contains(@class, 'col-md-8')]/div[@ng-switch='isAuthenticated()']"));
+        headerWidget = new HeaderWidget(driver, By.id("navbar-collapse"));
     }
 
     public boolean isLoggedIn() {
@@ -37,7 +32,7 @@ public class GurukulaPage extends WebPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if (!(sel.getDriver() instanceof HtmlUnitDriver))
+        if (!(driver instanceof HtmlUnitDriver))
             headerWidget.waitForPresentAndVisible(pageWaitTime);
         return this;
     }

@@ -1,13 +1,15 @@
 package com.gurukula.testlib;
 
-import com.github.seleniumpm.Selenium;
-import com.github.seleniumpm.pagemodel.WebPage;
+import com.github.seleniumpm.WebPage;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+import java.net.URI;
 
 public class HomePageUnauthenticated extends GurukulaPage {
 
-    public HomePageUnauthenticated(Selenium sel) {
-        super(sel);
+    public HomePageUnauthenticated(WebDriver driver, URI server) {
+        super(driver, server);
         path = "/#/";
     }
 
@@ -22,7 +24,7 @@ public class HomePageUnauthenticated extends GurukulaPage {
     }
 
     public WebPage waitForPageLoad() {
-        if (!(sel.getDriver() instanceof HtmlUnitDriver)) {
+        if (!(driver instanceof HtmlUnitDriver)) {
             super.waitForPageLoad();
             loginWidget.waitForPresentAndVisible(pageWaitTime);
         }

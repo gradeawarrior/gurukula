@@ -21,17 +21,17 @@ public class TestBranchPage extends GurukulaTest {
     public void classSetUp() throws Exception {
         try {
             // Instantiate all pages that will be visited
-            homePageAuthenticated = new HomePageAuthenticated(sel);
-            loginPage = new LoginPage(sel);
-            branchPage = new BranchPage(sel);
+            homePageAuthenticated = new HomePageAuthenticated(browser, gurukulaURL);
+            loginPage = new LoginPage(browser, gurukulaURL);
+            branchPage = new BranchPage(browser, gurukulaURL);
 
             // Login
             loginPage.open();
             loginPage.login("admin", "admin");
             homePageAuthenticated.waitForPageLoad().validate();
         } catch (Exception e) {
-            if (sel != null)
-                sel.quit();
+            if (browser != null)
+                browser.quit();
             throw e;
         }
     }

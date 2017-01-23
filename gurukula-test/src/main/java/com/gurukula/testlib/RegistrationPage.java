@@ -1,10 +1,12 @@
 package com.gurukula.testlib;
 
-import com.github.seleniumpm.Selenium;
-import com.github.seleniumpm.pagemodel.webelements.Button;
-import com.github.seleniumpm.pagemodel.webelements.TextElement;
-import com.github.seleniumpm.pagemodel.webelements.TextField;
+import com.github.seleniumpm.webelements.Button;
+import com.github.seleniumpm.webelements.TextElement;
+import com.github.seleniumpm.webelements.TextField;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import java.net.URI;
 
 public class RegistrationPage extends GurukulaPage {
     public TextElement errorMessage;
@@ -18,20 +20,20 @@ public class RegistrationPage extends GurukulaPage {
     public TextField passwordConfirmField;
     public Button registerButton;
 
-    public RegistrationPage(Selenium sel) {
-        super(sel);
+    public RegistrationPage(WebDriver driver, URI server) {
+        super(driver, server);
         path = "/#/register";
 
-        errorMessage = new TextElement(sel, By.xpath("//div[@translate='register.messages.error.fail']/strong"));
-        minPasswordMessage = new TextElement(sel, By.xpath("//p[@translate='global.messages.validate.newpassword.minlength']"));
-        invalidEmailMessage = new TextElement(sel, By.xpath("//p[@translate='global.messages.validate.email.invalid']"));
-        minCharacterEmailMessage = new TextElement(sel, By.xpath("//p[@translate='global.messages.validate.email.minlength']"));
+        errorMessage = new TextElement(driver, By.xpath("//div[@translate='register.messages.error.fail']/strong"));
+        minPasswordMessage = new TextElement(driver, By.xpath("//p[@translate='global.messages.validate.newpassword.minlength']"));
+        invalidEmailMessage = new TextElement(driver, By.xpath("//p[@translate='global.messages.validate.email.invalid']"));
+        minCharacterEmailMessage = new TextElement(driver, By.xpath("//p[@translate='global.messages.validate.email.minlength']"));
 
-        loginField = new TextField(sel, By.name("login"));
-        emailField = new TextField(sel,By.name("email"));
-        passwordField = new TextField(sel, By.name("password"));
-        passwordConfirmField = new TextField(sel, By.name("confirmPassword"));
-        registerButton = new Button(sel, By.xpath("//button[@type='submit']"));
+        loginField = new TextField(driver, By.name("login"));
+        emailField = new TextField(driver,By.name("email"));
+        passwordField = new TextField(driver, By.name("password"));
+        passwordConfirmField = new TextField(driver, By.name("confirmPassword"));
+        registerButton = new Button(driver, By.xpath("//button[@type='submit']"));
     }
 
     public RegistrationPage waitForPageLoad() {

@@ -1,14 +1,15 @@
 package com.gurukula.testlib;
 
-import com.github.seleniumpm.Selenium;
-import com.github.seleniumpm.pagemodel.WebPage;
 
-import java.util.concurrent.TimeUnit;
+import com.github.seleniumpm.WebPage;
+import org.openqa.selenium.WebDriver;
+
+import java.net.URI;
 
 public class HomePageAuthenticated extends HomePageUnauthenticated {
 
-    public HomePageAuthenticated(Selenium sel) {
-        super(sel);
+    public HomePageAuthenticated(WebDriver driver, URI server) {
+        super(driver, server);
     }
 
     public WebPage waitForPageLoad() {

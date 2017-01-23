@@ -21,17 +21,17 @@ public class TestAccessControls extends GurukulaTest {
     public void classSetUp() throws Exception {
         try {
             // Instantiate all pages that will be visited
-            homePageUnauthenticated = new HomePageUnauthenticated(sel);
-            homePageAuthenticated = new HomePageAuthenticated(sel);
-            loginPage = new LoginPage(sel);
-            branchPage = new BranchPage(sel);
-            staffsPage = new StaffsPage(sel);
-            sessionsPage = new SessionsPage(sel);
-            settingsPage = new SettingsPage(sel);
-            passwordPage = new PasswordPage(sel);
+            homePageUnauthenticated = new HomePageUnauthenticated(browser, gurukulaURL);
+            homePageAuthenticated = new HomePageAuthenticated(browser, gurukulaURL);
+            loginPage = new LoginPage(browser, gurukulaURL);
+            branchPage = new BranchPage(browser, gurukulaURL);
+            staffsPage = new StaffsPage(browser, gurukulaURL);
+            sessionsPage = new SessionsPage(browser, gurukulaURL);
+            settingsPage = new SettingsPage(browser, gurukulaURL);
+            passwordPage = new PasswordPage(browser, gurukulaURL);
         } catch (Exception e) {
-            if (sel != null)
-                sel.quit();
+            if (browser != null)
+                browser.quit();
             throw e;
         }
     }

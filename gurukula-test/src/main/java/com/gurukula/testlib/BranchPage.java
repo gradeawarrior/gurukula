@@ -1,24 +1,25 @@
 package com.gurukula.testlib;
 
+import com.github.seleniumpm.WebPage;
+import com.github.seleniumpm.webelements.Button;
+import com.github.seleniumpm.webelements.Table;
 import com.gurukula.testlib.widgets.CreateEditBranchWidget;
-import com.github.seleniumpm.Selenium;
-import com.github.seleniumpm.pagemodel.WebPage;
-import com.github.seleniumpm.pagemodel.webelements.Button;
-import com.github.seleniumpm.pagemodel.webelements.Table;
-import org.apache.commons.lang.NotImplementedException;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import java.net.URI;
 
 public class BranchPage extends GurukulaPage {
     public Button createBranchButton;
     public CreateEditBranchWidget createEditBranchWidget;
     public Table branchesTable;
 
-    public BranchPage(Selenium sel) {
-        super(sel);
+    public BranchPage(WebDriver driver, URI server) {
+        super(driver, server);
         path = "/#/branch";
-        createBranchButton = new Button(sel, By.xpath("//button/span[@translate='gurukulaApp.branch.home.createLabel']"));
-        createEditBranchWidget = new CreateEditBranchWidget(sel, By.name("editForm"));
-        branchesTable = new Table(sel, By.xpath("//div[contains(@class, 'table-responsive')]/table"));
+        createBranchButton = new Button(driver, By.xpath("//button/span[@translate='gurukulaApp.branch.home.createLabel']"));
+        createEditBranchWidget = new CreateEditBranchWidget(driver, By.name("editForm"));
+        branchesTable = new Table(driver, By.xpath("//div[contains(@class, 'table-responsive')]/table"));
     }
 
     public WebPage waitForPageLoad() {
