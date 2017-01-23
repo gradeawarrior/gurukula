@@ -25,7 +25,7 @@
         <dependency>
             <groupId>com.github.gradeawarrior</groupId>
             <artifactId>selenium-pagemodel</artifactId>
-            <version>2.3-SNAPSHOT</version>
+            <version>2.3</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
