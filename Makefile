@@ -120,3 +120,6 @@ security.scan: check.version
 	$(info security.scan)
 	$(info ******************)
 	$(warn This is currently not implemented. See wiki page for support: https://github.com/gradeawarrior/gurukula)
+
+list:
+	@grep '^[^#[:space:]].*:' Makefile
